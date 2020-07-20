@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+    Index
+</title>
+        <link rel="stylesheet" href=" styleb.css"> 
+        <link rel="stylesheet" href=" style.css">
+    </head>
+    <body>
+        <div class="layout-head" role="alert">
+            <h1>MGM`s POLYTECHNIC</h1>
+        </div>
+        <hr>
+        <div class="sbs-main">
+            <!--
+            <h3>Filter By:</h3>
+            <div class="alert alert-info" role="alert">    
+                <p>
+                    Select Department, Subject code and Academic year to 
+                    modify or to view the details repectivly.    
+                </p>
+            </div>
+            
+            <div class="form-group sbs filter-sub">
+                <form>
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Department...</option>
+                        <option>Database</option>
+                    </select>
+
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Subject Code ...</option>
+                        <option>Database</option>
+                    </select>
+                    
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Academic Year ...</option>
+                        <option>Database</option>
+                    </select>
+                    <input type="submit" class="btn btn-primary sbs">
+                </form>
+            </div>    
+        </div>
+        -->
+        
+    <div class="sbs-main">
+        <hr>
+        <div class="sbs nevg">
+            <aside>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Index</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student-list">Student List</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mapping">CO-PO Statements</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            <input type="button" class="btn btn-primary" value="Logout">
+                        </a><hr>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+
+        
+
+  <form action="/" method="POST">
+    <div class="sbs layout-main">
+        <div class="below-hr">
+            <h3>Initial Details</h3>
+            <div class="form-row row-in">
+                <div class="col lab">ACADEMIC YEAR :</div>
+                <div class="col col-in">
+                    <input name="academicYear" type="text"  value="" class="form-control input" required placeholder="YYYY-YY">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">SEMESTER :</div>
+                <div class="col col-in">
+                    <select name="semester" class="form-control sbs sele input">
+                        
+                        <option selected disabled>Select ...</option>
+                        
+                        
+                        <option>1</option>
+                        
+                        <option>2</option>
+                        
+                        <option>3</option>
+                        
+                        <option>4</option>
+                        
+                        <option>5</option>
+                        
+                        <option>6</option>
+                        
+                    </select>
+                </div>
+            </div>
+            <div class="form-row row-in row-in">
+                <div class="col lab">FACULTY :</div>
+                <div class="col col-in">
+                    <input name="faculty" type="text" value="" class="form-control input" required placeholder="Faculty Name">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">SUBJECT :</div>
+                <div class="col col-in">
+                    <input name="subject" type="text" value="" class="form-control input" required placeholder="Subject Nanme">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">SUBJECT CODE :</div>
+                <div class="col col-in">
+                    <input name="subjectCode" type="number" value="" class="form-control input" required placeholder="12345">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">ABBREVIATION :</div>
+                <div class="col col-in">
+                    <input name="abbreviation" type="text" value="" class="form-control input" required placeholder="XYZ">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">COURSE/SEMESTER :</div>
+                <div class="col col-in">
+                    <input name="courseSemester" type="text" value="" class="form-control input" required placeholder="CO1I">
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">CO CODE :</div>
+                <div class="col col-in">
+                    <input name="coCode" type="text" value="" class="form-control input" required placeholder="CO000">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="below-hr">
+            <h3>Weightage for *EA</h3>
+            <div class="alert alert-info sbs-main" role="alert">
+                <div class="sbs">    
+                    <table>
+                        <tr>
+                            <th colspan="2">CO ATTAINMENT (100%)</th>
+                        </tr>
+
+                        <tr>
+                            <td>Internal Assessment (IA)</td>
+                            <td>30%</td>
+                        </tr>
+                        <tr>
+                            <td>External Assessment (EA)</td>
+                            <td>70%</td>
+                        </tr>
+                    </table>
+                    <p>Note : Set POE '0', if not available.</p>
+                </div>
+                <div class="sbs">    
+                    <ul>
+                        <li>EA : External Assesment</li>
+                        <li>POE : Pracitcal or Oral Examination</li>
+                        <li>TW : Term Work</li>
+                        <li>TH : Theory</li>
+                    </ul>
+                </div>
+            
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">TH :</div>
+                <div class="col col-in">
+                    <input name="th" type="number" value="" class="form-control input" required>
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">POE :</div>
+                <div class="col col-in">
+                    <input name="poe" type="number" value="" class="form-control input" required>
+                </div>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">TW:</div>
+                <div class="col col-in">
+                    <input name="tw" type="number" value="" class="form-control input" required>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="below-hr">
+            <h3>Avarage Marks (selected by program)</h3>
+            <div class="alert alert-info" role="alert">
+                <table>
+                    <tr>
+                        <th>Situations</th>
+                        <th>Level</th>
+                    </tr>
+                    <tr>
+                        <td>50% students scoring > 50% Marks</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>60% students scoring > 50% Marks</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>70% students scoring > 50% Marks</td>
+                        <td>3</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form-row row-in">
+                <div class="col lab">Avarage Marks:</div>
+                <div class="col col-in">
+                    <input name="avgMarks" type="number" value="" class="form-control input" required>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="proceed below-hr">
+          
+          <input type="hidden" class="btn btn-primary" name="tempId1" value="0">
+          
+          <input type="submit" class="btn btn-primary" value="Save & Proceed">
+
+        </div>
+
+
+    </div>
+  </form>
+
+
+
+    </div>
+
+    
+
+
+
+        
+    </body>
+</html>
