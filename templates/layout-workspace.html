@@ -1,0 +1,39 @@
+{% extends "layout.html" %} 
+
+{% block view %}
+    <div class="sbs-main">
+        <hr>
+        <div class="sbs nevg">
+            <aside>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Index</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/student-list">Student List</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mapping">CO-PO Statements</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a><hr>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">
+                            <input type="button" class="btn btn-primary" value="Logout">
+                        </a><hr>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+
+        {% block workspace %} {% endblock %}
+
+    </div>
+
+    
+
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    CO Mapping
+{% endblock %}
+
+
+{% block view %}
+
+    
+    <div class="layout-view" >
+        <hr>
+        <h3>CO-PO-PSO Mapping</h3>
+        <div class="alert alert-info" role="alert">
+            <p>Enter correlation levels 1, 2 or 3 as defined below:</p>
+            <table>
+                <tr>
+                    <td>1</td>
+                    <td>Slight (Low)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Moderate (Medium)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Substantial (High)</td>
+                </tr>
+            </table>
+            If there is no correlation, put '0'.
+        </div>
+        <!--
+        <div>
+          <h3>New Course Outcome Statement</h3>
+          <div class="form-row row-in">
+            <div class="col">
+              <input type="text" class="form-control" id="CO-stat" required placeholder="New Course Outcome Statement">
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Add new">
+            </div>
+          </div>
+        -->
+        </div>
+        <hr>
+        <div>
+          <h3>Course Outcome Table</h3>
+          <table class="table table-me">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col" class="CO-th">CO codes</th>
+                <th scope="col" id="COS-th">Course Outcome Statements</th>
+                <th scope="col" class="CO-th">PO1</th>
+                <th scope="col" class="CO-th">PO2</th>
+                <th scope="col" class="CO-th">PO3</th>
+                <th scope="col" class="CO-th">PO4</th>
+                <th scope="col" class="CO-th">PO5</th>
+                <th scope="col" class="CO-th">PO6</th>
+                <th scope="col" class="CO-th">PO7</th>
+                <th scope="col" class="CO-th">PSO1</th>
+                <th scope="col" class="CO-th">PSO2</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+              <tr>
+                <td>{{row.coCode}}</td>
+                <td>{{row.statement}}</td>
+                <td>{{row.po1}}</td>
+                <td>{{row.po2}}</td>
+                <td>{{row.po3}}</td>
+                <td>{{row.po4}}</td>
+                <td>{{row.po5}}</td>
+                <td>{{row.po6}}</td>
+                <td>{{row.po7}}</td>
+                <td>{{row.pso1}}</td>
+                <td>{{row.pso2}}</td>
+              </tr>
+              {% endfor %}
+        
+              {% if rows != [] %}
+              <tr>
+                <td colspan="2">Total</td>
+                <td>{{total['c_po1']}}</td>
+                <td>{{total['c_po2']}}</td>
+                <td>{{total['c_po3']}}</td>
+                <td>{{total['c_po4']}}</td>
+                <td>{{total['c_po5']}}</td>
+                <td>{{total['c_po6']}}</td>
+                <td>{{total['c_po7']}}</td>
+                <td>{{total['c_pso1']}}</td>
+                <td>{{total['c_pso2']}}</td>
+              </tr>
+              <tr>
+                <td colspan="2">Correlation Levels</td>
+                <td>{{avg['a_po1']}}</td>
+                <td>{{avg['a_po2']}}</td>
+                <td>{{avg['a_po3']}}</td>
+                <td>{{avg['a_po4']}}</td>
+                <td>{{avg['a_po5']}}</td>
+                <td>{{avg['a_po6']}}</td>
+                <td>{{avg['a_po7']}}</td>
+                <td>{{avg['a_pso1']}}</td>
+                <td>{{avg['a_pso2']}}</td>
+              </tr>
+              {% endif %}
+
+              <form action="/mapping" method="POST">
+                <tr>
+                  <td colspan="2"><textarea class="form-control td-in" name="statement" required placeholder="New Course Outcome Statement"></textarea></td>
+                  <td><input type="number"  name="po1" class="form-control td-in" required></td>
+                  <td><input type="number"  name="po2"class="form-control td-in" required></td>
+                  <td><input type="number"  name="po3"class="form-control td-in" required></td>
+                  <td><input type="number"  name="po4"class="form-control td-in" required></td>
+                  <td><input type="number"  name="po5"class="form-control td-in" required></td>
+                  <td><input type="number"  name="po6"class="form-control td-in" required></td>
+                  <td><input type="number"  name="po7"class="form-control td-in" required></td>
+                  <td><input type="number"  name="pso1"class="form-control td-in" required></td>
+                  <td><input type="number"  name="pso2"class="form-control td-in" required></td>
+                  <td id="CO-add"><input type="submit" class="btn btn-primary td-in" value="Add" required></td>
+                </tr>
+              </form>
+            
+            </tbody>
+          </table>
+        </div>
+    </div>
+
+    <div class="proceed">
+      <hr>
+      <a href="/"><input type="button" class="btn btn-primary" value="Return To Index"></a>
+      <a href="/dashboard" ><input type="button"  class="btn btn-primary" value="Return To Dashboard"></a>
+    </div>
+
+
+{% endblock %}

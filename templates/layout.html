@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+        <link rel="stylesheet" href=" {{url_for('static',filename='/boostrap/style.css')}}"> 
+        <link rel="stylesheet" href=" {{url_for('static',filename='/css/style.css')}}">
+    </head>
+    <body>
+        <div class="layout-head" role="alert">
+            <h1>MGM`s POLYTECHNIC</h1>
+        </div>
+        <hr>
+        <div class="sbs-main">
+            <!--
+            <h3>Filter By:</h3>
+            <div class="alert alert-info" role="alert">    
+                <p>
+                    Select Department, Subject code and Academic year to 
+                    modify or to view the details repectivly.    
+                </p>
+            </div>
+            
+            <div class="form-group sbs filter-sub">
+                <form>
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Department...</option>
+                        <option>Database</option>
+                    </select>
+
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Subject Code ...</option>
+                        <option>Database</option>
+                    </select>
+                    
+                    <select class="form-control sbs sele input">
+                        <option selected disabled>Academic Year ...</option>
+                        <option>Database</option>
+                    </select>
+                    <input type="submit" class="btn btn-primary sbs">
+                </form>
+            </div>    
+        </div>
+        -->
+        {% block view %} {% endblock %}
+
+        
+    </body>
+</html>

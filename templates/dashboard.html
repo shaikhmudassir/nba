@@ -1,0 +1,43 @@
+{% extends "layout-workspace.html" %} 
+
+{% block title %}
+    Dashbaord
+{% endblock %}
+
+{% block workspace %}
+
+  <div class="sbs layout-main">
+    <h3>Dashbaord</h3>
+    <table class="table table-me">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">S.no</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Subject Code</th>
+                <th scope="col">Course/Sem</th>
+                <th scope="col">Academic Year</th>
+                <th scope="col">Edit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+                <td>{{loop.index}}</td>
+                <td>{{row.subject}}</td>
+                <td>{{row.subjectCode}}</td>
+                <td>{{row.courseSemester}}</td>
+                <td>{{row.academicYear}}</td>
+                <td>
+                  <form action="/" method="POST">
+                    <input type="hidden" class="btn btn-primary" name="tempId1" value="{{row.Id}}">
+                    <input type="submit" class="btn btn-primary" value="Edit">
+                  </form>
+                </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+  </div>
+
+{% endblock %}
