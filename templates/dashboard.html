@@ -8,6 +8,12 @@
 
   <div class="sbs layout-main">
     <h3>Dashbaord</h3>
+
+    <form action="/index" method="POST" class="proceed">
+      <input type="hidden" class="btn btn-primary" name="new" value="new">
+      <input type="submit" class="btn btn-primary" value="Create New">
+    </form>
+
     <table class="table table-me">
         <thead class="thead-dark">
             <tr>
@@ -29,7 +35,7 @@
                 <td>{{row.courseSemester}}</td>
                 <td>{{row.academicYear}}</td>
                 <td>
-                  <form action="/" method="POST">
+                  <form action="/index" method="POST">
                     <input type="hidden" class="btn btn-primary" name="tempId1" value="{{row.Id}}">
                     <input type="submit" class="btn btn-primary" value="Edit">
                   </form>

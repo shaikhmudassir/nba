@@ -63,8 +63,18 @@ class Comapping(db.Model):
   pso2 = db.Column(db.Integer,unique=False,nullable=True)
   fieldId = db.Column(db.Integer,unique=False,nullable=False)
 
-
 @app.route('/',methods=['GET','POST'])
+def dashboard():
+  if 'user_id' in session:
+    pass
+  else:
+     return redirect('/login')
+
+  select = Index.query.filter_by(userId=session['user_id'])
+  
+  return render_template('dashboard.html',rows=select)
+
+@app.route('/index',methods=['GET','POST'])
 def index():
   # Check Login 
   if 'user_id' in session:
@@ -87,7 +97,13 @@ def index():
     avgMarks = request.form.get('avgMarks')
     tempId1 = request.form.get('tempId1')
     tempId2 = request.form.get('tempId2')
+    new = request.form.get('new')
+
+    if new == "new":
+      return render_template('index.html',row=None)
+
     
+    # Only if request come form Index.html page
     if tempId1 == '0':
       entry = Index(
         academicYear = academicYear,  		
@@ -138,8 +154,9 @@ def index():
   if 'field_id' in session:
     select = Index.query.filter_by(Id=session['field_id']).first()
     return render_template('index.html',row=select)
-  return render_template('index.html',row=None)
-
+  
+  return ('<h1>Error</h1>')
+  
 
 
 @app.route('/login',methods=['GET','POST'])
@@ -319,18 +336,6 @@ def test():
 @app.route('/a',methods=['GET','POST'])
 def no():
   return render_template('login.html')
-
-
-@app.route('/dashboard',methods=['GET','POST'])
-def dashboard():
-  if 'user_id' in session:
-    pass
-  else:
-     return redirect('/login')
-
-  select = Index.query.filter_by(userId=session['user_id'])
-  
-  return render_template('dashboard.html',rows=select)
 
 
 @app.route('/logout')
