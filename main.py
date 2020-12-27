@@ -5,6 +5,8 @@ from werkzeug.utils import secure_filename
 import os
 import csv
 import math
+import time
+import array as array
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
@@ -33,6 +35,27 @@ class Index(db.Model):
   userId = db.Column(db.Integer,unique=False,nullable=False)
   filename = db.Column(db.String(100),unique=False,nullable=True)
 
+class Test1(db.Model):
+  Id=db.Column(db.Integer,primary_key=True)
+  rollNo=db.Column(db.Integer,nullable=False) 
+  CO1_Percentage=db.Column(db.Float,unique=False,nullable=True)
+  CO2_Percentage=db.Column(db.Float,unique=False,nullable=True) 
+  CO1_Total=db.Column(db.Integer,unique=False,nullable=True)
+  CO2_Total=db.Column(db.Integer,unique=False,nullable=True)
+  Total=db.Column(db.Integer,unique=False,nullable=True)
+  CO1_Calculation=db.Column(db.Integer,unique=False,nullable=True)    
+  CO2_Calculation=db.Column(db.Integer,unique=False,nullable=True)
+
+class Test2(db.Model):
+  Id=db.Column(db.Integer,primary_key=True)
+  rollNo=db.Column(db.Integer,nullable=False) 
+  CO3_Percentage=db.Column(db.Float,unique=False,nullable=True)
+  CO4_Percentage=db.Column(db.Float,unique=False,nullable=True) 
+  CO3_Total=db.Column(db.Integer,unique=False,nullable=True)
+  CO4_Total=db.Column(db.Integer,unique=False,nullable=True)
+  Total=db.Column(db.Integer,unique=False,nullable=True)
+  CO3_Calculation=db.Column(db.Integer,unique=False,nullable=True)    
+  CO4_Calculation=db.Column(db.Integer,unique=False,nullable=True)        
 
 class Login(db.Model):
   Id = db.Column(db.Integer,primary_key=True)
@@ -215,12 +238,12 @@ def studentList():
     with open(app.config['UPLOAD_FOLDER'] + '\\' + select.filename,'r') as file:
       rows = csv.DictReader(file)
       for row in rows:
-        entry = Studentlist(
+        entry = Studentlist (
           rollNo = row['Roll No.'],
           enrollNo = row['Enroll No.'],
           studentsName = row['Name of Students'],
           fieldId = session['field_id'],
-          userId = session['user_id']
+         # userId = session['user_id']
         )
         db.session.add(entry)
         db.session.commit()
@@ -243,7 +266,7 @@ def mapping():
     return ('<h1>Error</h1>')
 
   select = Comapping.query.filter_by(fieldId=session['field_id']).all()
-  count = len(select)
+  count = len(select)  
   print('select ',select)
   print('count', count)
   if request.method == 'POST':
@@ -312,8 +335,108 @@ def Round(a, b):
 
 
 @app.route('/test1',methods=['GET','POST'])
-def test():
-  return render_template('test1.html')
+def test1():
+  try:
+    select = Studentlist.query.all()
+    cal_co1=[]
+    cal_co2=[]
+    co1_marks=17
+    co2_marks=19
+    percent_co1=0
+    percent_co2=0
+    ## Collecing row data ##
+    if(request.method=="POST"):
+     for row in select:
+      total=int(request.form["co1.1"+str(row.rollNo)])+int(request.form["co1.2"+str(row.rollNo)]) \
+      +int(request.form["co1.3"+str(row.rollNo)])+int(request.form["co1.4"+str(row.rollNo)]) \
+      +int(request.form["co1.5"+str(row.rollNo)])+int(request.form["co2.1"+str(row.rollNo)]) \
+      +int(request.form["co2.2"+str(row.rollNo)])+int(request.form["co2.3"+str(row.rollNo)]) \
+      +int(request.form["co2.4"+str(row.rollNo)])+int(request.form["co2.5"+str(row.rollNo)])
+      co1_total=int(request.form["co1.1"+str(row.rollNo)])+int(request.form["co1.2"+str(row.rollNo)]) \
+      +int(request.form["co1.3"+str(row.rollNo)])+int(request.form["co1.4"+str(row.rollNo)]) \
+      +int(request.form["co1.5"+str(row.rollNo)])
+      co2_total=total-co1_total
+      percent_co1=round(((co1_total/co1_marks)*100),2)
+      percent_co2=round(((co2_total/co2_marks)*100),2)
+      if percent_co1>50:
+        cal_co1=1
+      else: 
+        cal_co1=0 
+      if percent_co2>50:
+        cal_co2=1
+      else: 
+        cal_co2=0   
+      cos=Test1(
+      rollNo=row.rollNo,
+      CO1_Total=co1_total,
+      CO1_Percentage=percent_co1,
+      CO2_Total=co2_total,
+      CO2_Percentage=percent_co2,
+      Total=total,
+      CO1_Calculation=cal_co1,
+      CO2_Calculation=cal_co2,
+      )
+      ## Storing data in DB   ##
+      db.session.add(cos)
+      db.session.commit()
+      percent_co1,percent_co2,cal_co1,cal_co2=0,0,0,0
+     time.sleep(1)
+     all_total=Test1.query.all()
+     return render_template('test1.html',rows=all_total)
+    else:
+      return render_template('test1.html', rows=select)
+  except: 
+    return "There was an Error"
+
+@app.route('/test2',methods=['GET','POST'])
+def test2():
+    select = Studentlist.query.all()
+    cal_co3=[]
+    cal_co4=[]
+    co3_marks=9
+    co4_marks=16
+    percent_co3=0
+    percent_co4=0
+    ## Collecing row data ##
+    if(request.method=="POST"):
+     for row in select:
+      total=int(request.form["co3.1"+str(row.rollNo)])+int(request.form["co3.2"+str(row.rollNo)]) \
+      +int(request.form["co3.3"+str(row.rollNo)])+int(request.form["co3.4"+str(row.rollNo)]) \
+      +int(request.form["co4.1"+str(row.rollNo)])+int(request.form["co4.2"+str(row.rollNo)]) \
+      +int(request.form["co4.3"+str(row.rollNo)])+int(request.form["co4.4"+str(row.rollNo)]) \
+      +int(request.form["co4.5"+str(row.rollNo)])
+      co3_total=int(request.form["co3.1"+str(row.rollNo)])+int(request.form["co3.2"+str(row.rollNo)]) \
+      +int(request.form["co3.3"+str(row.rollNo)])+int(request.form["co3.4"+str(row.rollNo)]) 
+      co4_total=total-co3_total
+      percent_co3=round(((co3_total/co3_marks)*100),2)
+      percent_co4=round(((co4_total/co4_marks)*100),2)
+      if percent_co3>50:
+        cal_co3=1
+      else: 
+        cal_co3=0 
+      if percent_co4>50:
+        cal_co4=1
+      else: 
+        cal_co4=0   
+      cos=Test2(
+      rollNo=row.rollNo,
+      CO3_Total=co3_total,
+      CO3_Percentage=percent_co3,
+      CO4_Total=co4_total,
+      CO4_Percentage=percent_co4,
+      Total=total,
+      CO3_Calculation=cal_co3,
+      CO4_Calculation=cal_co4,
+      )
+      ## Storing data in DB   ##
+      db.session.add(cos)
+      db.session.commit()
+      percent_co3,percent_co4,cal_co3,cal_co4=0,0,0,0
+     time.sleep(1)
+     all_total=Test1.query.all()
+     return render_template('test2.html',rows=all_total)
+    else:
+      return render_template('test2.html', rows=select)
 
 
 @app.route('/a',methods=['GET','POST'])
