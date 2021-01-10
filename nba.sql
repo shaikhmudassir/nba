@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.7.1
--- http://www.phpmyadmin.net
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2020 at 09:05 AM
--- Server version: 5.5.39
--- PHP Version: 5.4.31
+-- Generation Time: Dec 27, 2020 at 07:02 PM
+-- Server version: 10.4.10-MariaDB
+-- PHP Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `nba`
@@ -26,8 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `comapping`
 --
 
-CREATE TABLE IF NOT EXISTS `comapping` (
-`Id` int(11) NOT NULL,
+CREATE TABLE `comapping` (
+  `Id` int(11) NOT NULL,
   `coCode` varchar(20) NOT NULL,
   `statement` text NOT NULL,
   `po1` int(5) DEFAULT NULL,
@@ -40,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `comapping` (
   `pso1` int(5) DEFAULT NULL,
   `pso2` int(5) DEFAULT NULL,
   `fieldId` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `comapping`
@@ -60,8 +62,8 @@ INSERT INTO `comapping` (`Id`, `coCode`, `statement`, `po1`, `po2`, `po3`, `po4`
 -- Table structure for table `index`
 --
 
-CREATE TABLE IF NOT EXISTS `index` (
-`Id` int(11) NOT NULL,
+CREATE TABLE `index` (
+  `Id` int(11) NOT NULL,
   `academicYear` varchar(10) NOT NULL,
   `semester` int(5) NOT NULL,
   `faculty` text NOT NULL,
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `index` (
   `avgMarks` int(5) NOT NULL,
   `userId` int(10) NOT NULL,
   `filename` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `index`
@@ -87,7 +89,8 @@ INSERT INTO `index` (`Id`, `academicYear`, `semester`, `faculty`, `subject`, `su
 (2, '2021-22', 5, 'Patil sir', 'Netwotk', 45671, 'DCC', 'CO5I', 'CO0051', 40, 0, 60, 50, 1, 'DCC2021-22.csv'),
 (3, '2020-21', 3, 'aaaa', 'Physics', 46814, 'aaa', 'aaa', 'CO1001', 70, 0, 30, 45, 2, NULL),
 (4, '2021-22', 6, 'ZZ', 'kuch Bhi', 12213, '23', 'bbb', '213', 12, 12, 12, 65, 1, 'Book1.csv'),
-(5, 'dfds', 2, 'dfgdf', 'dfgdf', 546, 'fdgdf', 'fgdd', 'dfgdf', -4545454, -456, -56, 456, 1, NULL);
+(5, 'dfds', 2, 'dfgdf', 'dfgdf', 546, 'fdgdf', 'fgdd', 'dfgdf', -4545454, -456, -56, 456, 1, NULL),
+(6, '2020-21', 1, 'ABC', 'maths', 1226, 'XYZ', 'CO2I', 'C000', 2, 1, 3, 50, 4, 'XYZ2020-21.csv');
 
 -- --------------------------------------------------------
 
@@ -95,11 +98,11 @@ INSERT INTO `index` (`Id`, `academicYear`, `semester`, `faculty`, `subject`, `su
 -- Table structure for table `login`
 --
 
-CREATE TABLE IF NOT EXISTS `login` (
-`Id` int(11) NOT NULL,
+CREATE TABLE `login` (
+  `Id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `login`
@@ -108,7 +111,8 @@ CREATE TABLE IF NOT EXISTS `login` (
 INSERT INTO `login` (`Id`, `username`, `password`) VALUES
 (1, 'khansir', 'pbkdf2:sha256:150000$jllcfg4p$b3227221474afc5ebfd9a77111c34eb468b1248fd9b1e1bde6cdaa2a3a5c2c4f'),
 (2, 'test', 'pbkdf2:sha256:150000$zgV75bD7$00836c4cf27f1402fa1012816489446d002e8f55c9e1ae7c82494b2be030a53a'),
-(3, 'test2', 'pbkdf2:sha256:150000$6YLiDEyF$e7622286ed2019d13d92650c4f7445c69197bd08beb6f3b0290da741219d33d5');
+(3, 'test2', 'pbkdf2:sha256:150000$6YLiDEyF$e7622286ed2019d13d92650c4f7445c69197bd08beb6f3b0290da741219d33d5'),
+(4, 'abc', 'pbkdf2:sha256:150000$XM8eNW0s$e3d5a8f47bc0471f6ece5a55f057f8fcaf4ef933baf16342313bf1dc23b5eda3');
 
 -- --------------------------------------------------------
 
@@ -116,13 +120,13 @@ INSERT INTO `login` (`Id`, `username`, `password`) VALUES
 -- Table structure for table `studentlist`
 --
 
-CREATE TABLE IF NOT EXISTS `studentlist` (
-`id` int(11) NOT NULL,
+CREATE TABLE `studentlist` (
+  `id` int(11) NOT NULL,
   `rollNo` int(11) NOT NULL,
   `enrollNo` int(11) NOT NULL,
   `studentsName` text NOT NULL,
   `fieldId` int(11) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=139 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `studentlist`
@@ -266,7 +270,113 @@ INSERT INTO `studentlist` (`id`, `rollNo`, `enrollNo`, `studentsName`, `fieldId`
 (135, 33212, 1615010471, ' TATHE RISHIKESH RAJENDRA', 2),
 (136, 33219, 1615010181, ' KACHWAH AMARESHSINH AJMATSINH', 2),
 (137, 33220, 1615010261, ' MODI PRATIKSHA GOKULPRASAD', 2),
-(138, 33229, 1416300008, ' SIDDAMSHETTY AKASH NAGRAJ', 2);
+(138, 33229, 1416300008, ' SIDDAMSHETTY AKASH NAGRAJ', 2),
+(139, 3301, 1234, 'UAR', 6),
+(140, 33101, 1215010305, 'Ariyan Motowani', 6),
+(141, 33102, 1315010150, ' DEHADRAY SHIVANI RAJENDRA', 6),
+(142, 33103, 1415010092, ' WANKHEDE POOJA DIPAK', 6),
+(143, 33104, 1415010202, ' SUHAS SANJAY DEHADE', 6),
+(144, 33105, 1515010031, ' SHAHANE KOMAL KARBHARI', 6),
+(145, 33106, 1515010036, ' SABLE SHRADDHA VIJAY', 6),
+(146, 33107, 1515010044, ' PADME AARTI NAMDEO', 6),
+(147, 33108, 1515010046, ' BANKAR SWAPNIL RAJU', 6),
+(148, 33109, 1515010048, ' GAIKWAD ASHWINI YASHWANT', 6),
+(149, 33110, 1515010051, ' SHARDUL NEHA ROHIDAS', 6),
+(150, 33111, 1515010101, 'HAREL GEETANJALI BHAGWAN', 6),
+(151, 33112, 1515010104, 'JOSHI SHUBHANGI LAXMIKANT ', 6),
+(152, 33113, 1515010106, ' NIKAM VARSHA PRAKASH', 6),
+(153, 33114, 1515010112, ' DANDEKAR RUTUJA VASANT', 6),
+(154, 33115, 1515010118, ' SHUKLA SAMRUDHI GOPALKRISHNA', 6),
+(155, 33116, 1515010126, ' MOGRE RUCHITA RAMESHWAR', 6),
+(156, 33117, 1515010137, ' KHAN MOHAMMED SOHAIL ', 6),
+(157, 33118, 1515010140, 'JOSHI PRATHMESH NANDKUMAR', 6),
+(158, 33119, 1615010001, 'PATIL DHANASHREE KRISHNA', 6),
+(159, 33120, 1615010021, ' SONAWANE MANISHA RAOSAHEB', 6),
+(160, 33121, 1615010028, ' KACHWAH GAYATRI AJMATSINH', 6),
+(161, 33122, 1615010022, ' GIGANI AFZAL AKBAR', 6),
+(162, 33123, 1615010032, ' KAMBLE AMOL SUNIL', 6),
+(163, 33124, 1615010035, ' KALLOLE SAKSHI SHRINIVAS', 6),
+(164, 33125, 1615010038, ' DESHPANDE REVATI PRASHANT', 6),
+(165, 33126, 1615010040, ' PANMAND TEJAL SAMPAT', 6),
+(166, 33127, 1615010042, ' PANDHEKAR SHRIKANT RAJESH', 6),
+(167, 33128, 1615010046, ' TANGADE PRIYA PRASHANT', 6),
+(168, 33129, 1615010050, ' POPHALE ABHISHEK LAXMIKANT', 6),
+(169, 33130, 1615010061, ' GADGILE KISHORI KAILAS', 6),
+(170, 33131, 1615010063, ' KUTE AMRUTA SANJAY', 6),
+(171, 33132, 1615010069, ' ROHOKALE PALLAVI SURESH', 6),
+(172, 33133, 1615010071, ' GANGAWANE PRATIKSHA RAJENDRA', 6),
+(173, 33134, 1615010073, ' SABIR MUSTANSIR ABDEALI', 6),
+(174, 33135, 1615010074, ' SANKAYE MANSI SATISH', 6),
+(175, 33136, 1615010101, ' BULDAK MUKESHKUMAR KESHARRAM', 6),
+(176, 33137, 1615010106, ' PANDE SAKSHI SHAILESH', 6),
+(177, 33138, 1615010107, ' SHERE SHALAKA SHASHIR', 6),
+(178, 33139, 1615010111, ' PATHARE RUTUJA PRAVIN', 6),
+(179, 33140, 1615010120, ' KHADKE SHUBHANGI LAXMAN', 6),
+(180, 33141, 1615010124, ' GIRGAONKAR DIKSHA LAXMIKANT', 6),
+(181, 33142, 1615010131, ' SARODE ABHISHEK SANJEEV', 6),
+(182, 33143, 1615010135, ' KULKARNI PRATIK RAHUL', 6),
+(183, 33144, 1615010138, ' CHAVAN SNEHA BABASAHEB', 6),
+(184, 33145, 1615010140, ' BHIVSANE PALLAVI PRADIP', 6),
+(185, 33146, 1615010150, ' JOSHI KALYANI PANDURANG', 6),
+(186, 33147, 1615010155, ' PATIL KUNDAN RAJENDRA', 6),
+(187, 33148, 1615010165, ' MAHALANKAR SAURADH SANJAY', 6),
+(188, 33149, 1615010168, ' BAHIWAL NEHA VIJAY', 6),
+(189, 33150, 1615010185, ' MENDHE RAVI PARASHRAM', 6),
+(190, 33151, 1615010188, ' MENDHE RAJ PARASHRAM', 6),
+(191, 33152, 1615010273, ' WAGH JAGRUTI SUNIL', 6),
+(192, 33153, 1615010274, ' GODSE POOJA PANDHARINATH', 6),
+(193, 33154, 1615010276, ' LAHANE NIKITA UTTAM', 6),
+(194, 33155, 1715010053, ' DOBHAL SHUBHAM RAMCHANDRA', 6),
+(195, 33156, 1715010056, ' SHAIKH SABIR SHAIKH TAHER', 6),
+(196, 33157, 1715010057, ' TRISHITA PANJA', 6),
+(197, 33158, 1715010058, ' KHODASKAR SHREYASH PRASHANT', 6),
+(198, 33159, 1715010060, ' SAWANDKAR SUDARSHAN BALAJI', 6),
+(199, 33160, 1715010061, ' PATHAK JAYESH PRAMOD', 6),
+(200, 33161, 1715010064, ' SHAIKH IRFAN SHAFEEK', 6),
+(201, 33162, 1715010065, ' GADKARI PRATHAMESH NARENDRA', 6),
+(202, 33163, 1715010066, ' SHAIKH SARA MOHAMMED SAFIULLAH', 6),
+(203, 33201, 1311540002, ' KAYANDE KRISHNA CHANDRAKANT', 6),
+(204, 33206, 1515010073, ' BEDVE GAYATREE LALIT', 6),
+(205, 33212, 1615010471, ' TATHE RISHIKESH RAJENDRA', 6),
+(206, 33219, 1615010181, ' KACHWAH AMARESHSINH AJMATSINH', 6),
+(207, 33220, 1615010261, ' MODI PRATIKSHA GOKULPRASAD', 6),
+(208, 33229, 1416300008, ' SIDDAMSHETTY AKASH NAGRAJ', 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test1`
+--
+
+CREATE TABLE `test1` (
+  `id` int(11) NOT NULL,
+  `Rollno` int(11) NOT NULL,
+  `CO1_Total` int(11) NOT NULL,
+  `CO1_Percentage` float NOT NULL,
+  `CO2_Total` int(11) NOT NULL,
+  `CO2_Percentage` float NOT NULL,
+  `Total` int(11) NOT NULL,
+  `CO1_Calculation` int(11) NOT NULL,
+  `CO2_Calculation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `test2`
+--
+
+CREATE TABLE `test2` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `Rollno` int(11) NOT NULL,
+  `CO3_Total` int(11) NOT NULL,
+  `CO3_Percentage` float NOT NULL,
+  `CO4_Total` int(11) NOT NULL,
+  `CO4_Percentage` float NOT NULL,
+  `Total` int(11) NOT NULL,
+  `CO3_Calculation` int(11) NOT NULL,
+  `CO4_Calculation` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -276,25 +386,31 @@ INSERT INTO `studentlist` (`id`, `rollNo`, `enrollNo`, `studentsName`, `fieldId`
 -- Indexes for table `comapping`
 --
 ALTER TABLE `comapping`
- ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `index`
 --
 ALTER TABLE `index`
- ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `login`
 --
 ALTER TABLE `login`
- ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `studentlist`
 --
 ALTER TABLE `studentlist`
- ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `test1`
+--
+ALTER TABLE `test1`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -304,22 +420,33 @@ ALTER TABLE `studentlist`
 -- AUTO_INCREMENT for table `comapping`
 --
 ALTER TABLE `comapping`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `index`
 --
 ALTER TABLE `index`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `studentlist`
 --
 ALTER TABLE `studentlist`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=209;
+
+--
+-- AUTO_INCREMENT for table `test1`
+--
+ALTER TABLE `test1`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

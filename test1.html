@@ -1,0 +1,140 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    Student List
+{% endblock %}
+
+
+{% block view %}
+<form method="POST">
+  <div class="layout-view" >
+    <hr>
+    <h3>Upload Student List</h3>
+    <div class="alert alert-info sbs-main" role="alert">
+      <ul>
+        <li>You have to upload student list which must have 'Roll No.', 'Enroll No.', 'Name of Students' columns. </li>
+        <li>File must in CSV (*.csv) format.  <a href="excelTocsv.html">How to convert excel to csv</a></li>
+      </ul>
+    </div>
+    <form action="/student-list" method="POST" enctype="multipart/form-data">
+      <div class="form-row row-in">
+        <div class="col lab">
+            <input type="file" name="filename" >
+        </div>
+        <div class="col col-in">
+            <input type="submit" class="btn btn-primary sbs">
+        </div>
+      </div>
+    </form>
+    <hr>
+    <h3>Students list</h3>
+    {% if rows != None %}
+    <form method="POST" action="/test1">
+    <table id="table" class="table table-me">
+        <thead class="thead-dark">
+          <tr>
+            <th rowspan="2" >Roll No.</th>
+            <th colspan="4">Q1 Any three (9 Marks)</th>
+            <th colspan="3">Q2 Any two (8 Marks)</th>
+            <th colspan="3">Q3 Any two (8 Marks)</th>
+            <th rowspan="2" >Total</th>
+            <th rowspan="2" >Marks CO503.1</th>
+            <th rowspan="2" >% CO503.1</th>
+            <th rowspan="2" >Marks CO503.2</th>
+            <th rowspan="2" >% CO503.2</th>
+            <th rowspan="2" >Calculation CO503.1</th>
+            <th rowspan="2" >Calculation CO503.2</th>
+          </tr>
+          <tr>
+            <th>CO503.1</th>
+            <th>CO503.1</th>
+            <th>CO503.2</th>
+            <th>CO503.1</th>
+            <th>CO503.2</th>
+            <th>CO503.1</th>
+            <th>CO503.2</th>
+            <th>CO503.2</th>
+            <th>CO503.2</th>
+            <th>CO503.1</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>3</th>
+            <th>3</th>
+            <th>3</th>
+            <th>3</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>25</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+
+            <td >{{row.rollNo}}</td>
+            <td><input value=0 type="number" name=co1.1{{row.rollNo}} id=co1.1{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co1.2{{row.rollNo}} id=co1.2{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co2.1{{row.rollNo}} id=co2.1{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co1.3{{row.rollNo}} id=co1.3{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co2.2{{row.rollNo}} id=co2.2{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co1.4{{row.rollNo}} id=co1.4{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co2.3{{row.rollNo}} id=co2.3{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co2.4{{row.rollNo}} id=co2.4{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co2.5{{row.rollNo}} id=co2.5{{row.rollNo}} class="form-control td-in "></td>
+            <td><input value=0 type="number" name=co1.5{{row.rollNo}} id=co1.5{{row.rollNo}}  class="form-control td-in "></td>
+            
+            <td onchange=adder(this) id="total" name="total">{{row.Total}}</td>  
+            <td>{{row.CO1_Total}}</td>
+            <td>{{row.CO1_Percentage}}%</td>
+            <td>{{row.CO2_Total}}</td>
+            <td>{{row.CO2_Percentage}}%</td>
+            <td>{{row.CO1_Calculation}}</td>
+            <td>{{row.CO2_Calculation}}</td>
+            </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+      <input type="submit" class="btn btn-primary btn-lg" style="width:20%;" value="Enter">
+    </form>
+      {% endif %}
+  </div>
+  <div class="proceed">
+    <hr>
+    <a href="/"><input type="button" class="btn btn-primary" value="Return To Index"></a>
+    <a href="/dashboard" ><input type="button"  class="btn btn-primary" value="Return To Dashboard"></a>
+  </div>
+</form>
+
+{% endblock %}
