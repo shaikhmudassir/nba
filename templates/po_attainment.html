@@ -1,0 +1,100 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    PO Mapping
+{% endblock %}
+
+{% block view %}
+
+    
+    <div class="layout-view">
+      <h3>PO-Attainment</h3>
+    </div>
+          <table class="table table-me">
+            <thead class="thead-dark">
+              <tr >
+                 <th style="background-color:#212529  ;color: aliceblue;" colspan="2">Achived CO Through IA+EA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for i in range(0,5)%}
+             <tr>
+                 {% if rows[i]!=None %}
+                 <td>{{rows[i]}}</td>
+                 {% endif %}
+                 {% if final_assesment[i]!=None %}
+                 <td>{{final_assesment[i]}}</td>
+                 {% endif %}
+             </tr>     
+                 {% endfor%}
+            </tbody>
+          </table><hr>
+            <h3>CO-PO-PSO Mapping</h3>
+          <table class="table table-me">
+            <thead class="thead-dark">
+                <tr>
+                    <th>CO CODES</th>
+                    <th>PO1</th>
+                    <th>PO2</th>
+                    <th>PO3</th>
+                    <th>PO4</th>
+                    <th>PO5</th>
+                    <th>PO6</th>
+                    <th>PO7</th>
+                    <th>PSO1</th>
+                    <th>PSO2</th>
+                </tr>
+                {% for rows in co_mapping%}
+                <tr>
+                    <td>{{rows.coCode}}</td>
+                    <td>{{rows.po1}}</td>
+                    <td>{{rows.po2}}</td>
+                    <td>{{rows.po3}}</td>
+                    <td>{{rows.po4}}</td>
+                    <td>{{rows.po5}}</td>
+                    <td>{{rows.po6}}</td>
+                    <td>{{rows.po7}}</td>
+                    <td>{{rows.pso1}}</td>
+                    <td>{{rows.pso1}}</td>
+                </tr>
+
+                {% endfor%}
+
+                
+            </thead>
+            <tbody>
+            
+            </tbody>
+          </table><hr>
+          <table class="table table-me">
+            <thead class="thead-dark">
+              <h3>PO direct Attainment</h3>
+                <tr>
+                    <th>PO</th>
+                    <th>PO1</th>
+                    <th>PO2</th>
+                    <th>PO3</th>
+                    <th>PO4</th>
+                    <th>PO5</th>
+                    <th>PO6</th>
+                    <th>PO7</th>
+                    <th>PSO1</th>
+                    <th>PSO2</th>
+                </tr>
+                
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{coCode[0]}}</td>
+                {% for u in range(0,9) %}
+                  <td>{{po_direct[u]}}</td>
+                {% endfor %}
+              </tr>
+            </tbody>
+          </table>
+        
+
+    
+
+
+{% endblock %}

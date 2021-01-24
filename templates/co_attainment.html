@@ -1,0 +1,114 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    CO Attainment
+{% endblock %}
+
+
+{% block view %}
+
+    
+    <div class="layout-view" >
+        <h3>CO Attainment</h3>
+        </div>
+        <hr>
+        <div>
+          <h3>CO ATTAINMENT THROUGH IA + EA</h3>
+          <table class="table table-me">
+            <thead class="thead-dark">
+              <tr>
+                <th rowspan="2">Attainment Type</th>
+                <th rowspan="2">Tool</th>
+                <th rowspan="1" colspan="5">Attainment Level achieved for various tools for attainment calculation</th>
+              </tr>
+              <tr>
+                {%for row in rows %}
+                <th rowspan="1" >{{row.coCode}}</th>
+                {% endfor%}
+              </tr>
+              <tr>  
+                <th rowspan="5">Internal Assesment</th>
+                <th>Class Test</th>
+                {% for row in rows1%}
+                 <td>{{row.CO1_Level}}</td>
+                 <td>{{row.CO2_Level}}</td>
+                 <td>{{row.CO3_Level}}</td>
+                {% endfor %}
+                {%for row in rows2 %}
+                <td>{{row.CO4_Level}}</td>
+                <td>{{row.CO5_Level}}</td>
+                {% endfor%}
+            </tr>
+            <tr>
+              <th>Micro Project</th>
+              {% for row in rows3%}
+                <td>{{row.attainment_level_acheived_Co1}}</td>
+                <td>{{row.attainment_level_acheived_Co2}}</td>
+                <td>{{row.attainment_level_acheived_Co3}}</td>
+                <td>{{row.attainment_level_acheived_Co4}}</td>
+                <td>{{row.attainment_level_acheived_Co5}}</td>
+              {% endfor%}
+            </tr>
+            <th>ESE PR@</td>  
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+                <td>NA</td>
+            </tr>
+            <tr>
+           <th>PR PA</th>
+           {% for n in range(0,5) %}
+           <td>{{attainment_prpa[n]}}</td>
+           {% endfor %}
+            </tr>
+            <tr>
+              <th>Attainment Level</th>
+              {% for n in range(0,5) %}
+              <td>{{attainment_internal[n]}}</td>
+              {% endfor %}
+            </tr>
+            <tr >
+              <th rowspan="3">External Assesment</th>
+              <th>ESE Theory</th>
+              {% for row in rows4 %}
+               <td>{{row.TH_Level}}</td>
+               <td>{{row.TH_Level}}</td>
+               <td>{{row.TH_Level}}</td>
+               <td>{{row.TH_Level}}</td>
+               <td>{{row.TH_Level}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+              <th>ESE PR</th>
+              {% for row in rows4 %}
+               <td>{{row.PR_Level}}</td>
+               <td>{{row.PR_Level}}</td>
+               <td>{{row.PR_Level}}</td>
+               <td>{{row.PR_Level}}</td>
+               <td>{{row.PR_Level}}</td>
+              {% endfor %}
+            </tr>
+            <tr>
+               <th>Attainment Level</th>
+                 <td>{{attainment_external[0]}}</td>
+                 <td>{{attainment_external[0]}}</td>
+                 <td>{{attainment_external[0]}}</td>
+                 <td>{{attainment_external[0]}}</td>
+                 <td>{{attainment_external[0]}}</td>
+          
+            </tr>
+            <tr>
+              <th colspan="2">Final direct Attainment</th>
+              {% for n in range(0,5)%}
+                <td>{{final_assesment[n]}}</td>
+              {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+          </table>
+       
+
+{% endblock %}

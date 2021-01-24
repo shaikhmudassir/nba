@@ -1,90 +1,211 @@
 {% extends "layout.html" %} 
 
 {% block title %}
-    Student List
+    Class Test 1
 {% endblock %}
 
 
 {% block view %}
 
-  <div class="layout-view" >
-    <hr>
-    <h3>Upload Student List</h3>
-    <div class="alert alert-info sbs-main" role="alert">
-      <ul>
-        <li>You have to upload student list which must have 'Roll No.', 'Enroll No.', 'Name of Students' columns. </li>
-        <li>File must in CSV (*.csv) format.  <a href="excelTocsv.html">How to convert excel to csv</a></li>
-      </ul>
-    </div>
-    <form action="/student-list" method="POST" enctype="multipart/form-data">
-      <div class="form-row row-in">
-        <div class="col lab">
-            <input type="file" name="filename" >
-        </div>
-        <div class="col col-in">
-            <input type="submit" class="btn btn-primary sbs">
-        </div>
-      </div>
-    </form>
-    <hr>
-    <h3>Students list</h3>
-    % if rows != None %
-    <table class="table table-me">
+    <h3>Class Test 1</h3>
+    {% if rows != None %}
+    <table id="table" class="table table-me">
         <thead class="thead-dark">
           <tr>
-            <th rowspan="2" >Roll No.</th>
-            <th colspan="4">Q1 Any three (9 Marks)</th>
-            <th colspan="3">Q2 Any two (8 Marks)</th>
-            <th colspan="3">Q3 Any two (8 Marks)</th>
-            <th rowspan="2" >Total</th>
-            <th rowspan="2" >Marks CO503.1</th>
-            <th rowspan="2" >% CO503.1</th>
-            <th rowspan="2" >Marks CO503.1</th>
-            <th rowspan="2" >% CO503.1</th>
-            <th rowspan="2" >Calculation CO503.1</th>
-            <th rowspan="2" >Calculation CO503.1</th>
+            <th rowspan="4">Sr No.</th>
+            <th rowspan="4">Roll No</th>
+            <th rowspan="4">Name of Student</th>
+            <th colspan="6">Q1 Any four (8 Marks)</th>
+            <th colspan="5" >2 Any three 12 marks</th>   
           </tr>
           <tr>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
-            <th>CO503.1</th>
+            <th>CE503.1</th>
+            <th>CE503.1</th>
+            <th>CE503.1</th>
+            <th>CE503.2</th>
+            <th>CE503.2</th>
+            <th>CE503.2</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+          </tr>
+          <tr>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>e</th>
+            <th>f</th>
+            <th>a</th>
+            <th>b</th>
+            <th>c</th>
+            <th>d</th>
+            <th>e</th>
+          </tr>
+          <tr>
+            <th>2</th>
+            <th>2</th>
+            <th>2</th>
+            <th>2</th>
+            <th>2</th>
+            <th>2</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
+            <th>4</th>
           </tr>
         </thead>
         <tbody>
-            <td>23145</td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td><input type="number" class="form-control td-in "></td>
-            <td>0</td>
-            <td>12</td>
-            <td>45.36%</td>
-            <td>12</td>
-            <td>45.36%</td>
-            <td>0</td>
-            <td>0</td>
+          <form method="POST" action="/test1">
+          {% for row in rows %}
+            <tr>
+              <td>{{row.Id}}</td>
+              <td>{{row.rollNo}}</td>
+              <td>{{row.StudentName}}</td>
+              <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}1 id={{row.rollNo}}1 style="display:none">{{row.CO1_1 if row.CO1_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}2" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}2 id={{row.rollNo}}2 style="display:none">{{row.CO1_2 if row.CO1_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}3" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}3 id={{row.rollNo}}3 style="display:none">{{row.CO1_3 if row.CO1_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}4" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}4 id={{row.rollNo}}4 style="display:none">{{row.CO2_1 if row.CO2_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}5" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}5 id={{row.rollNo}}5 style="display:none">{{row.CO2_2 if row.CO2_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}6" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}6 id={{row.rollNo}}6 style="display:none">{{row.CO2_3 if row.CO2_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}7" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}7 id={{row.rollNo}}7 style="display:none">{{row.CO3_1 if row.CO3_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}8" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}8 id={{row.rollNo}}8 style="display:none">{{row.CO3_2 if row.CO3_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}9" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}9 id={{row.rollNo}}9 style="display:none">{{row.CO3_3 if row.CO3_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}10" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}10  id={{row.rollNo}}10 style="display:none">{{row.CO3_4 if row.CO3_4>=0 else ""}}</td>
+              <td id="{{row.rollNo}}11" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}11  id={{row.rollNo}}11 style="display:none">{{row.CO3_5 if row.CO3_5>=0 else ""}}</td>
+              <td><input type="submit" class="btn btn-primary" name="{{row.StudentName}}" value="Edit"></td>   
+              <script>
+                function inputter(present){
+                  console.log(document.getElementById(present).childNodes[0].id)
+                  document.getElementById(present).childNodes[0].style.display="block"
+                }
+                </script>             
+            </tr>
+
+              {% endfor %}
+              {% endif %}
+              <tr>
+                {% if rollno !=0 %}
+                <td>{{id}}</td>
+                <td>{{rollno}}</td>
+                <td>{{name}}</td>
+                <td><input value=0 type="number" name=co1.1 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co1.2 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co1.3 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co2.1 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co2.2 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co2.3 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co3.1 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co3.2 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co3.3 class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co3.4  class="form-control td-in "></td>
+                <td><input value=0 type="number" name=co3.5  class="form-control td-in "></td>
+               <td><input type="submit" class="btn btn-primary" name="entry" value="Enter"></td>
+              </form>
+          </tr>
+          {% endif %}
+          <thead class="thead-dark">
+            <tr>
+            <th colspan="3">Average Marks(57%)</th>
+            <td>1.14</td>
+            <td>1.14</td>
+            <td>1.14</td>
+            <td>1.14</td>
+            <td>1.14</td>
+            <td>1.14</td>
+            <td>2.28</td>
+            <td>2.28</td>
+            <td>2.28</td>
+            <td>2.28</td>
+            <td>2.28</td>
+          </tr>
+          <tr>
+            {% if total != None %}
+            <th colspan="3">Number of Students who attempted</th>
+            <td>{{total["co1_1"]}}</td>
+            <td>{{total["co1_2"]}}</td>
+            <td>{{total["co1_3"]}}</td>
+            <td>{{total["co2_1"]}}</td>
+            <td>{{total["co2_2"]}}</td>
+            <td>{{total["co2_3"]}}</td>
+            <td>{{total["co3_1"]}}</td>
+            <td>{{total["co3_2"]}}</td>
+            <td>{{total["co3_3"]}}</td>
+            <td>{{total["co3_4"]}}</td>
+            <td>{{total["co3_5"]}}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            {% if avg != None %}
+            <th colspan="3">Number of students getting makrs more than average marks</th>
+            <td>{{avg["co1_1"]}}</td>
+            <td>{{avg["co1_2"]}}</td>
+            <td>{{avg["co1_3"]}}</td>
+            <td>{{avg["co2_1"]}}</td>
+            <td>{{avg["co2_2"]}}</td>
+            <td>{{avg["co2_3"]}}</td>
+            <td>{{avg["co3_1"]}}</td>
+            <td>{{avg["co3_2"]}}</td>
+            <td>{{avg["co3_3"]}}</td>
+            <td>{{avg["co3_4"]}}</td>
+            <td>{{avg["co3_5"]}}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            {% if per != None %}
+            <th colspan="3">% of students getting marks more than average marks</th>
+            <td>{{per["co1_1"]}}%</td>
+            <td>{{per["co1_2"]}}%</td>
+            <td>{{per["co1_3"]}}%</td>
+            <td>{{per["co2_1"]}}%</td>
+            <td>{{per["co2_2"]}}%</td>
+            <td>{{per["co2_3"]}}%</td>
+            <td>{{per["co3_1"]}}%</td>
+            <td>{{per["co3_2"]}}%</td>
+            <td>{{per["co3_3"]}}%</td>
+            <td>{{per["co3_4"]}}%</td>
+            <td>{{per["co3_5"]}}%</td>
+            {% endif %}
+          </tr>
+          <br>
+          </thead>
         </tbody>
       </table>
-      % endif %
-  </div>
-  <div class="proceed">
-    <hr>
-    <a href="/index"><input type="button" class="btn btn-primary" value="Return To Index"></a>
-    <a href="/" ><input type="button"  class="btn btn-primary" value="Return To Dashboard"></a>
-  </div>
-
+      <br>
+      <br>
+      <table class="table table-me" style="width:50%">
+        <thead class="thead-dark">
+          <tr>
+            <th colspan="3">Attainment</th>
+            <td>%</td>
+            <td>Level</td>
+          </tr>
+          <tr>
+            <th colspan="3">% of Students scoring >= 57% in CE503.1</th>
+            {% if co1!= None %}
+            <td>{{att_per["co2"]}}%</td>
+            <td>{{level["co1"]}}</td>
+            {% endif %}
+          </tr>          
+          <tr>
+            <th colspan="3">% of Students scoring >= 57% in CE503.2</th>
+            {% if co2!= None %}
+            <td>{{att_per["co2"]}}%</td>
+            <td>{{level["co2"]}}</td>
+            {% endif %}
+          </tr>          
+          <tr>
+            <th colspan="3">% of Students scoring >= 57% in CE503.3</th>
+            {% if co3!= None %}
+            <td>{{att_per["co2"]}}%</td>
+            <td>{{level["co3"]}}</td>
+            {% endif %}
+          </tr>
+        </thead>
+      </table>
+  
 
 {% endblock %}

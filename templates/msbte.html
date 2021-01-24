@@ -1,0 +1,87 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+    MSBTE Final Examination
+{% endblock %}
+
+
+{% block view %}
+<h3>MSBTE Final Examination</h3>
+{% if rows != None %}
+<table id="table" class="table table-me">
+    <thead class="thead-dark">
+      <tr>
+        <th >Sr No.</th>
+        <th >Roll No</th>
+        <th >Name of Student</th>
+        <th>TH(ESE)</th>
+        <th colspan="2">PR(ESE)</th>   
+      </tr>
+      </thead>
+      <tbody>
+        <form method="POST" action="/msbte">
+      {% for row in rows %}
+      <tr>
+          <td>{{row.Id}}</td>
+          <td>{{row.rollNo}}</td>
+          <td>{{row.StudentName}}</td>
+          <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}1  id={{row.rollNo}}1 style="display:none">{{row.TH if row.TH>=0 else ""}}</td>
+          <td id="{{row.rollNo}}2" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}2  id={{row.rollNo}}2 style="display:none">{{row.PR if row.PR>=0 else ""}}</td>
+          <td><input type="submit" class="btn btn-primary" name="{{row.StudentName}}" value="Edit"></td>   
+          <script>
+            function inputter(present){
+              document.getElementById(present).childNodes[0].style.display="block"
+            }
+            </script> 
+      </tr>
+      {% endfor %}
+      {% endif %}
+      <tr>
+        {% if rollno !=0 %}
+          <td>{{id}}</td>
+          <td>{{rollno}}</td>
+          <td>{{name}}</td>
+          <td><input value=0 type="number" name="th" class="form-control td-in "></td>
+          <td><input value=0 type="number" name="pr" class="form-control td-in "></td>
+          <td><input type="submit" class="btn btn-primary" name="entry" value="Enter"></td>
+        </form>
+          {% endif %}
+      </tr>
+      <thead class="thead-dark">
+        <tr>
+          <th colspan="3">Average Marks (TH ESE = 68% & PR ESE= 68%)</th>
+          <td>47.6</td>
+          <td>34</td>
+        </tr>
+        <tr>
+          <th colspan="3">Number of Students who attempted</th>
+          {% if total!= None %}
+          <td>{{total["th"]}}</td>
+          <td>{{total["pr"]}}</td>
+            {% endif %}
+        </tr>
+        <tr>
+          <th colspan="3">Number of students getting makrs more than average marks</th>
+          {% if avg!= None %}
+          <td>{{avg["th"]}}</td>
+          <td>{{avg["pr"]}}</td>
+          {% endif %}
+        </tr>
+        <tr>
+            <th colspan="3">% of students getting marks more than average marks</th>
+            {% if per!=None  %}
+            <td>{{per["th"]}}</td>
+            <td>{{per["pr"]}}</td>
+              {% endif %}
+          </tr>
+        <tr>
+              <th colspan="3">Attainment level level achieved </th>
+              {% if level != None %}
+              <td>{{level["th"]}}</td>
+              <td>{{level["pr"]}}</td>
+                {% endif %}
+        </tr>
+      </thead>
+      </tbody>  
+  </table>
+  {% endblock %}  

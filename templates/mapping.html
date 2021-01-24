@@ -9,7 +9,6 @@
 
     
     <div class="layout-view" >
-        <hr>
         <h3>CO-PO-PSO Mapping</h3>
         <div class="alert alert-info" role="alert">
             <p>Enter correlation levels 1, 2 or 3 as defined below:</p>
@@ -29,18 +28,6 @@
             </table>
             If there is no correlation, put '0'.
         </div>
-        <!--
-        <div>
-          <h3>New Course Outcome Statement</h3>
-          <div class="form-row row-in">
-            <div class="col">
-              <input type="text" class="form-control" id="CO-stat" required placeholder="New Course Outcome Statement">
-            </div>
-            <div class="col">
-                <input type="submit" class="btn btn-primary" value="Add new">
-            </div>
-          </div>
-        -->
         </div>
         <hr>
         <div>
@@ -64,6 +51,7 @@
             <tbody>
               {% for row in rows %}
               <tr>
+                <form action="/mapping" method="POST">
                 <td>{{row.coCode}}</td>
                 <td>{{row.statement}}</td>
                 <td>{{row.po1}}</td>
@@ -75,6 +63,10 @@
                 <td>{{row.po7}}</td>
                 <td>{{row.pso1}}</td>
                 <td>{{row.pso2}}</td>
+                <input type="hidden" name="Id" value="{{row.Id}}">
+                <input type="hidden" name="edit" value="edit">
+                <td id="CO-add"><input type="submit" class="btn btn-primary td-in" value="Edit"></td>
+                </form>
               </tr>
               {% endfor %}
         
@@ -105,6 +97,25 @@
               </tr>
               {% endif %}
 
+              {% if edit == 0 %}
+              <form action="/mapping" method="POST">
+                <tr>
+                  <td colspan="2"><textarea class="form-control td-in" name="statement" required>{{row.statement}}</textarea></td>
+                  <td><input type="number" value="{{row.po1}}" name="po1" class="form-control td-in"  required></td>
+                  <td><input type="number" value="{{row.po2}}" name="po2" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.po3}}" name="po3" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.po4}}" name="po4" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.po5}}" name="po5" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.po6}}" name="po6" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.po7}}" name="po7" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.pso1}}" name="pso1" class="form-control td-in" required></td>
+                  <td><input type="number" value="{{row.pso2}}" name="pso2" class="form-control td-in" required></td>
+                  <input type="hidden" name="Id" value="{{row.Id}}">
+                  <input type="hidden" name="edit" value="edited">
+                  <td id="CO-add"><input type="submit" class="btn btn-primary td-in" value="Done" required></td>
+                </tr>
+              </form>
+              {% else %}
               <form action="/mapping" method="POST">
                 <tr>
                   <td colspan="2"><textarea class="form-control td-in" name="statement" required placeholder="New Course Outcome Statement"></textarea></td>
@@ -120,17 +131,12 @@
                   <td id="CO-add"><input type="submit" class="btn btn-primary td-in" value="Add" required></td>
                 </tr>
               </form>
+              {% endif %}
             
             </tbody>
           </table>
-        </div>
-    </div>
 
-    <div class="proceed">
-      <hr>
-      <a href="/index"><input type="button" class="btn btn-primary" value="Return To Index"></a>
-      <a href="/" ><input type="button"  class="btn btn-primary" value="Return To Dashboard"></a>
-    </div>
+    
 
 
 {% endblock %}

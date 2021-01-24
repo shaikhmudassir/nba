@@ -1,0 +1,125 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+   Assign
+{% endblock %}
+
+
+{% block view %}
+
+    
+    <div class="layout-view" >
+        <hr>
+        <h3>ASSIGNMENTS</h3>
+        <div class="alert alert-info" role="alert">
+            <p>Give the value according to marks</p>
+            <table>
+               {% for row in total %}
+                <tr>
+                    <td>No of students Present</td>
+                    <td>coming from database calculations</td>
+                </tr>
+                <tr>
+                    <td>% of Students scoring >50% in /coming from database/</td>
+                    <td>{{row[co1]}}</td>
+                </tr>
+                <tr>
+                    <td>% of Students scoring >50% in /coming from database/</td>
+                    <td>{{row[co2]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+       <!--the percentage value coming from automated data entered-->
+        </div>
+        <hr>
+        <div>
+          <h3>ASSIGNMENTS tables</h3>
+          <table style=" width:10% ;float: left;"  class="table table-me">
+            <thead class="thead-dark">
+              <tr>
+            <th>rollNo</th>
+              </tr>
+              <tr>
+                <th style=" border: 1px solid; padding-bottom: 140px;">    </th>
+                  </tr>
+
+            </thead>
+            <tbody>
+                {% for row in rows1 %}
+                <tr>
+                  <td>{{row.rollNo}}</td>
+                </tr>
+             
+              {% endfor %}
+            </tbody>
+          </table>
+          <table style=" margin-left:80px;top:0px;width: 90%;"   class="table table-me">
+            <thead class="thead-dark">
+              <tr>
+            <th colspan="2">solve anyFour_20 marks</th>
+            <th>CO503.5</th>
+            <th>CO503.6</th>
+            <th>CO503.5 calculations</th>
+            <th>CO503.6 calculations </th>
+              </tr>
+              <tr>
+                <th>CO503.5</th>
+                <th>CO503.6</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                 <th></th>
+                  </tr>
+                  <tr>
+                    <th>a</th>
+                    <th>b</th>
+                    <th></th>
+                <th></th>
+                <th></th>
+                 <th></th>
+                      </tr>
+                      <tr>
+                        <th>10</th>
+                        <th>10</th>
+                        <th></th>
+                <th></th>
+                <th></th>
+                 <th></th>
+                          </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+              <tr>
+                <td>{{row.Co1_assign}}</td>
+                <td>{{row.Co2_assign}}</td>
+                <td>{{row.Co1_per}}</td>
+                <td>{{row.Co2_per}}</td>
+                <td>{{row.Co1_cal}}</td>
+                <td>{{row.Co2_cal}}</td>
+               
+              </tr>
+              {% endfor %}
+              
+                <tr>
+                  <form action="/assign" method="POST"> 
+                  <td><input type="number"  name="co1" id="co1"  class="form-control td-in" ></td>
+                  <td><input type="number"   name="co2" id="co2"   class="form-control td-in" ></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td id="assign-add"><input type="submit" class="btn btn-primary td-in" value="Add" required></td>
+                </form>
+                </tr>
+             
+               
+                
+             
+              
+            </tbody>
+          </table>
+        
+
+
+{% endblock %}

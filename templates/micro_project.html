@@ -1,0 +1,146 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+   Micro project
+{% endblock %}
+
+
+{% block view %}
+{% set count =namespace(value=0)  %}
+    
+    <div class="layout-view" >
+        <h3>MICRO PROJECT ATTAINMENT</h3><hr>
+       <!--the percentage value coming from automated data entered-->
+    </div>
+          <table class="table table-me">
+            <thead class="thead-dark">
+            <tr>
+              <th >Roll No.</th>
+            <th >Name</th>
+                {% for row in rows3 %}
+              <th >{{row.coCode}}</th>
+              {% endfor %}
+              </tr>
+              </thead>
+            <tbody>
+              {% for select in rows %}
+              <form action="/micro_project" method="POST" >
+              <tr>
+                <td >{{studentsenterro[count.value]}}</td>
+                <td >{{stuententerName[count.value]}}</td>
+              <td style="display: none;visibility: hidden; height: 0;"><input style="display: none;visibility: hidden; height: 0;" type="number" value={{select.Id}}   name="{{select.Id}}" ></td>
+                {% if select.Co1!=-1 %}
+                <td  id="{{select.Id}}1" style=" padding-bottom:11px;" onclick=inputter(this.id) ><input style="display: none; height: 0;" type="number" value={{select.Co1}}  name="1{{select.Id}}" >{{select.Co1}}</td>
+                  {% elif select.Co1==none %}
+                  <td></td>
+                  {% else  %} 
+                   <td  id="{{select.Id}}1" style="  padding-bottom:11px;" onclick=inputter(this.id)  ><input style="display: none; height: 0;padding: 0;"  type="number" value=-1   name="1{{select.Id}}" ></td> 
+                
+                {% endif %} 
+                 {% if select.Co2!=-1 %}
+                  <td  id="{{select.Id}}2" style="  padding-bottom:11px;" onclick=inputter(this.id) ><input style="display: none; height: 0%; padding: 0%;"  type="number" value={{select.Co2}}  name="2{{select.Id}}" >{{select.Co2}}</td>
+                  {% elif select.Co2==none %}
+                  <td></td>
+                  {% else %} 
+                   <td  id="{{select.Id}}2" style=" padding-bottom:11px;"  onclick=inputter(this.id)  ><input style="display: none; height: 0%;padding: 0%"  type="number" value=-1   name="2{{select.Id}}"  ></td> 
+                 {% endif %}  
+                 {% if select.Co3!=-1 %}
+                 <td  id="{{select.Id}}3" style="  padding-bottom:11px;"  onclick=inputter(this.id)  ><input style="display: none; height: 0%;padding: 0%;" type="number" value={{select.Co3}}   name="3{{select.Id}}"  >{{select.Co3}}</td>
+                 {% elif select.Co3==none %}
+                 <td></td>
+                 {% else %} 
+                <td  id="{{select.Id}}3" style=" padding-bottom:11px;" onclick=inputter(this.id)  ><input style="display: none; height: 0%;padding: 0%;"  type="number" value=-1   name="3{{select.Id}}" ></td>  
+                 {% endif %} 
+                 {% if select.Co4!=-1 %}
+                  <td  id="{{select.Id}}4" style=" padding-bottom:11px;"onclick=inputter(this.id)  ><input style="display: none; height: 0%;padding: 0%;"  type="number" value={{select.Co4}}  name="4{{select.Id}}" >{{select.Co4}}</td>
+                  {% elif select.Co4==none %}
+                  <td></td>
+                  {% else %} 
+                   <td  id="{{select.Id}}4" style="  padding-bottom:11px;" onclick=inputter(this.id) ><input style="display: none; height: 0%;padding: 0%;"  type="number" value=-1   name="4{{select.Id}}" ></td> 
+                 {% endif %} 
+                 {% if select.Co5!=-1 %}
+                  <td  id="{{select.Id}}5" style="  padding-bottom:11px;" onclick=inputter(this.id) ><input style="display: none; height: 0%;padding: 0%;" type="number"  value={{select.Co5}} name="5{{select.Id}}" >{{select.Co5}}</td>
+                  {% elif select.Co5==none %}
+                  <td></td>
+                  {% else %} 
+                   <td  id="{{select.Id}}5" style="  padding-bottom:11px;" onclick=inputter(this.id)  ><input style="display: none; height: 0%;padding: 0%;"  type="number" value=-1   name="5{{select.Id}}" ></td> 
+                 {% endif %} 
+                 <td  style="  padding-bottom:11px;" ><input type="submit" class="btn btn-primary td-in" name="{{select.Id}}" value="Edit"></td>
+              </tr>
+              {% set count.value=count.value+1 %}
+              {% endfor %}
+              </form>
+                <tr>
+                  <form action="/micro_project" method="POST"> 
+                  <td>{{studentPresentro[0]}}</td>
+                  <td>{{studentPresentna[0]}}</td>            
+                  <td><input type="number" value=-1   name="co1" id="co1"  class="form-control td-in" ></td>
+                  <td><input type="number" value=-1   name="co2" id="co2"   class="form-control td-in" ></td>
+                  <td><input type="number" value=-1  name="co3" id="co3"   class="form-control td-in" ></td>
+                  <td><input type="number" value=-1  name="co4" id="co4"   class="form-control td-in" ></td>
+                  <td><input type="number"  value=-1 name="co5" id="co5"   class="form-control td-in" ></td>
+                  <td id="assign-add"><input type="submit" class="btn btn-primary td-in" value="Add" name="entry"></td>
+                </form>
+                </tr> 
+                {% for row in rows2 %}
+          <tr>
+            <th ></th>
+            <th >Avarage marks</th>
+            <th style="padding-left: 2px;">5.7</th>
+            <th style="padding-left: 2px;">5.7</th>
+            <th style="padding-left: 2px;">5.7</th>
+            <th style="padding-left: 2px;">5.7</th>
+            <th style="padding-left: 2px;">5.7</th>
+          </tr>
+          <tr>
+            <th  ></th>
+            <th >No of students who attemted</th>
+            <th>{{row.nostudents_attempted_Co1}}</th>
+            <th>{{row.nostudents_attempted_Co2}}</th>
+            <th>{{row.nostudents_attempted_Co3}}</th>
+            <th>{{row.nostudents_attempted_Co4}}</th>
+            <th>{{row.nostudents_attempted_Co5}}</th>
+          </tr>
+          <tr>
+            <th ></th>
+            <th >No of students getting more than avg</th>
+            <th>{{row.nostudents_more_than_avgMarks_Co1}}</th>
+            <th>{{row.nostudents_more_than_avgMarks_Co2}}</th>
+            <th>{{row.nostudents_more_than_avgMarks_Co3}}</th>
+            <th>{{row.nostudents_more_than_avgMarks_Co4}}</th>
+            <th>{{row.nostudents_more_than_avgMarks_Co5}}</th>
+          </tr>
+          <tr>
+            <th ></th>
+            <th >% of students getting more than avg marks</th>
+            <th style="width:10%;">{{row.per_of_students_more_than_avgMarks_Co1}}</th>
+            <th style="width:10%;">{{row.per_of_students_more_than_avgMarks_Co2}}</th>
+            <th style="width:10%;">{{row.per_of_students_more_than_avgMarks_Co3}}</th>
+            <th style="width:10%;">{{row.per_of_students_more_than_avgMarks_Co4}}</th>
+            <th style="width:10%;">{{row.per_of_students_more_than_avgMarks_Co5}}</th>
+          </tr>
+          <tr>
+            <th ></th>
+            <th >No of students getting more than avg</th>
+            <th>{{row.attainment_level_acheived_Co1}}</th>
+            <th>{{row.attainment_level_acheived_Co2}}</th>
+            <th>{{row.attainment_level_acheived_Co3}}</th>
+            <th>{{row.attainment_level_acheived_Co4}}</th>
+            <th>{{row.attainment_level_acheived_Co5}}</th>
+          </tr>
+    
+          {% endfor %}
+            </tbody>
+          </table>
+        <table style="padding-top: 0;"   class="table table-me">
+        </table>
+        
+    
+<script >
+ function inputter(ide){
+     document.getElementById(ide).childNodes[0].style.display="block";
+     document.getElementById(ide).childNodes[0].style.height="5%";
+     document.getElementById(ide).childNodes[0].style.width="70%";
+ }
+</script>
+{% endblock %}
