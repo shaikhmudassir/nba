@@ -425,7 +425,6 @@ def studentList():
       if select != None:
         select = Studentlist.query.filter_by(fieldId=session['field_id']).delete()
         db.session.commit()
-      print(session['field_id'])
       for row in rows:
         entry = Studentlist(
           rollNo = row['Roll No.'],

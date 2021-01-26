@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2021 at 03:43 PM
+-- Generation Time: Jan 26, 2021 at 01:28 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -104,7 +104,7 @@ CREATE TABLE `micro_project` (
 --
 
 CREATE TABLE `msbte` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Rollno` int(11) NOT NULL,
   `StudentName` varchar(200) NOT NULL,
   `TH` int(11) NOT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE `prpa` (
 --
 
 CREATE TABLE `studentlist` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `rollNo` int(11) NOT NULL,
   `enrollNo` int(11) NOT NULL,
   `studentsName` text NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE `studentlist` (
 --
 
 CREATE TABLE `test1` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Rollno` int(11) NOT NULL,
   `StudentName` varchar(200) NOT NULL,
   `CO1_1` int(11) DEFAULT NULL,
@@ -212,7 +212,7 @@ CREATE TABLE `test1` (
 --
 
 CREATE TABLE `test2` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Rollno` int(11) NOT NULL,
   `StudentName` varchar(200) NOT NULL,
   `CO4_1` int(11) NOT NULL,
@@ -282,7 +282,7 @@ CREATE TABLE `total_micro_project` (
 --
 
 CREATE TABLE `total_msbte` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Total_TH` int(11) NOT NULL,
   `Total_PR` int(11) NOT NULL,
   `TH_Level` int(11) NOT NULL,
@@ -318,7 +318,7 @@ CREATE TABLE `total_prpa` (
 --
 
 CREATE TABLE `total_test1` (
-  `id` int(11) NOT NULL,
+  `Id` int(11) NOT NULL,
   `Total_CO1_1` int(11) NOT NULL,
   `Total_CO1_2` int(11) NOT NULL,
   `Total_CO1_3` int(11) NOT NULL,
@@ -343,7 +343,7 @@ CREATE TABLE `total_test1` (
 --
 
 CREATE TABLE `total_test2` (
-  `id` int(11) NOT NULL DEFAULT 0,
+  `Id` int(11) NOT NULL,
   `Total_CO4_1` int(11) NOT NULL,
   `Total_CO4_2` int(11) NOT NULL,
   `Total_CO4_3` int(11) NOT NULL,
@@ -391,7 +391,8 @@ ALTER TABLE `micro_project`
 -- Indexes for table `msbte`
 --
 ALTER TABLE `msbte`
-  ADD UNIQUE KEY `id` (`id`);
+  ADD PRIMARY KEY (`Id`) USING BTREE,
+  ADD UNIQUE KEY `id` (`Id`);
 
 --
 -- Indexes for table `po_attainment`
@@ -415,19 +416,19 @@ ALTER TABLE `prpa`
 -- Indexes for table `studentlist`
 --
 ALTER TABLE `studentlist`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `test1`
 --
 ALTER TABLE `test1`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `test2`
 --
 ALTER TABLE `test2`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `total_attainment`
@@ -445,7 +446,7 @@ ALTER TABLE `total_micro_project`
 -- Indexes for table `total_msbte`
 --
 ALTER TABLE `total_msbte`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Indexes for table `total_prpa`
@@ -457,7 +458,13 @@ ALTER TABLE `total_prpa`
 -- Indexes for table `total_test1`
 --
 ALTER TABLE `total_test1`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`Id`);
+
+--
+-- Indexes for table `total_test2`
+--
+ALTER TABLE `total_test2`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -491,12 +498,42 @@ ALTER TABLE `micro_project`
 -- AUTO_INCREMENT for table `msbte`
 --
 ALTER TABLE `msbte`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `po_attainment`
 --
 ALTER TABLE `po_attainment`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `practical_prpa`
+--
+ALTER TABLE `practical_prpa`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `prpa`
+--
+ALTER TABLE `prpa`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `studentlist`
+--
+ALTER TABLE `studentlist`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `test1`
+--
+ALTER TABLE `test1`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `test2`
+--
+ALTER TABLE `test2`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -509,6 +546,30 @@ ALTER TABLE `total_attainment`
 -- AUTO_INCREMENT for table `total_micro_project`
 --
 ALTER TABLE `total_micro_project`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `total_msbte`
+--
+ALTER TABLE `total_msbte`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `total_prpa`
+--
+ALTER TABLE `total_prpa`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `total_test1`
+--
+ALTER TABLE `total_test1`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `total_test2`
+--
+ALTER TABLE `total_test2`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
