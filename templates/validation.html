@@ -1,0 +1,16 @@
+
+	<link rel="stylesheet" href=" {{url_for('static',filename='/boostrap/style.css')}}"> 
+    <link rel="stylesheet" href=" {{url_for('static',filename='/css/style.css')}}">
+	<input type="hidden" value="{{ serverSite }}" id="isServerSite">
+	<input type="hidden" value="{{ message }}" id='popup-message'>
+	<div class="hover_bkgr_fricc" id="pop-up">
+	<span class="helper"></span>
+	<div>
+        <img src="{{url_for('static',filename='/js/error.png')}}" id="pop-up-img"/>
+		<h3 id="pop-up-message"></h3>
+    
+        <button onclick="hidePopup();" class="btn btn-warning">Cancel</button>
+	</div>
+    </div>
+
+    <script src="{{url_for('static',filename='/js/validate.js')}}"></script>

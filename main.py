@@ -1947,7 +1947,7 @@ def po_attainment():
 
 @app.route('/a',methods=['GET','POST'])
 def no():
-  return render_template('login.html')
+  return render_template('validation.html',message="This is CS50", serverSite=True)
 
 @app.route('/logout')
 def logout():
