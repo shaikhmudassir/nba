@@ -5,6 +5,10 @@
 1. install Flask (pip install Flask) *
 2. install Flask-SQLalchemy (pip install flask-sqlalchemy) *
 3. install Mysqlclient (pip install mysqlclient) or (unofficial python binaries)
+	[if you are installing using unofficial binaries then make sure your python version should match mysqlclient package.
+	 for example if python version is 3.7.1 the we should use "mysqlclient-1.4.6-cp37-cp37m-win32.whl"
+	 where cp37 decribe python version
+	]
 
 
 ==============================================================

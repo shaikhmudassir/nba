@@ -1,3 +1,4 @@
+/* Validation Setup Start */
 function showPopup(message){
     document.getElementById("pop-up").style.display= 'block';
     document.getElementById("pop-up-message").innerText = message;
@@ -14,4 +15,7 @@ if(document.getElementById('isServerSite').value == 'True'){
     document.getElementsByTagName('button')[0].removeAttribute('onclick')
     document.getElementsByTagName('button')[0].setAttribute('onclick','hideNback();')
 }
+/* Setup End */
+
+
 
