@@ -56,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      <form method="POST" action="/test2">
+      <form method="POST" action="/test2" name="test2" onsubmit="return validatetest2()">
       {% for row in rows %}
         <tr>
           <td>{{row.Id}}</td>
@@ -73,11 +73,7 @@
           <td id="{{row.rollNo}}9" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}9 id={{row.rollNo}}9 style="display:none">{{row.CO5_4 if row.CO5_4>=0 else ""}}</td>
           <td id="{{row.rollNo}}10" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}10  id={{row.rollNo}}10 style="display:none">{{row.CO5_5 if row.CO5_5>=0 else ""}}</td>
           <td><input type="submit" class="btn btn-primary" name="{{row.StudentName}}" value="Edit"></td>   
-          <script>
-            function inputter(present){
-              console.log(document.getElementById(present).childNodes[0].id)
-              document.getElementById(present).childNodes[0].style.display="block"
-            }</script> 
+          
         </tr>
           {% endfor %}
           {% endif %}
@@ -86,16 +82,16 @@
             <td>{{id}}</td>
             <td>{{rollno}}</td>
             <td>{{name}}</td>
-            <td><input value=0 type="number" name=co4_1 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co4_2 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co4_3 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co4_4 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co5_1 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co5_2 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co4_5 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co5_3 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co5_4 class="form-control td-in "></td>
-            <td><input value=0 type="number" name=co5_5  class="form-control td-in "></td>
+            <td><input  id="two_marks1" value=0 type="number" name=co4_1 class="form-control td-in "></td>
+            <td><input id="two_marks2" value=0 type="number" name=co4_2 class="form-control td-in "></td>
+            <td><input id="two_marks3" value=0 type="number" name=co4_3 class="form-control td-in "></td>
+            <td><input id="two_marks4" value=0 type="number" name=co4_4 class="form-control td-in "></td>
+            <td><input id="two_marks5" value=0 type="number" name=co5_1 class="form-control td-in "></td>
+            <td><input id="two_marks6" value=0 type="number" name=co5_2 class="form-control td-in "></td>
+            <td><input id="six_marks1" value=0 type="number" name=co4_5 class="form-control td-in "></td>
+            <td><input id="six_marks2" value=0 type="number" name=co5_3 class="form-control td-in "></td>
+            <td><input id="six_marks3" value=0 type="number" name=co5_4 class="form-control td-in "></td>
+            <td><input id="six_marks4" value=0 type="number" name=co5_5  class="form-control td-in "></td>
            <td><input type="submit" class="btn btn-primary" name="entry" value="Enter"></td>
           </form>
       </tr>
@@ -188,6 +184,11 @@
       </tr>          
     </thead>
   </table>
-
+  <script>
+    function inputter(present){
+      console.log(document.getElementById(present).childNodes[0].id)
+      document.getElementById(present).childNodes[0].style.display="block"
+    }
+    </script> 
 
 {% endblock %}

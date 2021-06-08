@@ -6,14 +6,14 @@
 
 {% block workspace %}
 
-  <form action="/index" method="POST">
+  <form action="/index" method="POST" name="index" onsubmit="return validateIndex()">
     <div class="sbs layout-main">
         <div class="below-hr">
             <h3>Initial Details</h3>
             <div class="form-row row-in">
                 <div class="col lab">ACADEMIC YEAR :</div>
                 <div class="col col-in">
-                    <input name="academicYear" type="text"  value="{{row.academicYear}}" class="form-control input" required placeholder="YYYY-YY">
+                    <input id="year" name="academicYear" type="name"  value="{{row.academicYear}}" class="form-control input"  placeholder="YYYY-YY">
                 </div>
             </div>
             <div class="form-row row-in">
@@ -34,25 +34,25 @@
             <div class="form-row row-in row-in">
                 <div class="col lab">FACULTY :</div>
                 <div class="col col-in">
-                    <input name="faculty" type="text" value="{{row.faculty}}" class="form-control input" required placeholder="Faculty Name">
+                    <input id="faculty" name="faculty" type="text" value="{{row.faculty}}" class="form-control input" required placeholder="Faculty Name">
                 </div>
             </div>
             <div class="form-row row-in">
                 <div class="col lab">SUBJECT :</div>
                 <div class="col col-in">
-                    <input name="subject" type="text" value="{{row.subject}}" class="form-control input" required placeholder="Subject Nanme">
+                    <input id="subject" name="subject" type="text" value="{{row.subject}}" class="form-control input" required placeholder="Subject Nanme">
                 </div>
             </div>
             <div class="form-row row-in">
                 <div class="col lab">SUBJECT CODE :</div>
                 <div class="col col-in">
-                    <input name="subjectCode" type="number" value="{{row.subjectCode}}" class="form-control input" required placeholder="12345">
+                    <input id="subjectCode" name="subjectCode" type="number" value="{{row.subjectCode}}" class="form-control input" required placeholder="12345">
                 </div>
             </div>
             <div class="form-row row-in">
                 <div class="col lab">ABBREVIATION :</div>
                 <div class="col col-in">
-                    <input name="abbreviation" type="text" value="{{row.abbreviation}}" class="form-control input" required placeholder="XYZ">
+                    <input id="abbreviation" name="abbreviation" type="text" value="{{row.abbreviation}}" class="form-control input" required placeholder="XYZ">
                 </div>
             </div>
             <div class="form-row row-in">
@@ -64,7 +64,7 @@
             <div class="form-row row-in">
                 <div class="col lab">CO CODE :</div>
                 <div class="col col-in">
-                    <input name="coCode" type="text" value="{{row.coCode}}" class="form-control input" required placeholder="CO000">
+                    <input id="cocode" name="coCode" type="text" value="{{row.coCode}}" class="form-control input" required placeholder="CO000">
                 </div>
             </div>
         </div>
@@ -142,12 +142,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="number" value="{{row.ese_th}}" name="ese_th" class="form-control td-in" required=""></td>
-                        <td><input type="number" value="{{row.ese_prh}}" name="ese_prh" class="form-control td-in" required=""></td>
-                        <td><input type="number" value="{{row.ct}}" name="ct" class="form-control td-in" required=""></td>
-                        <td><input type="number" value="{{row.mp}}" name="mp" class="form-control td-in" required=""></td>
-                        <td><input type="number" value="{{row.ese_pra}}" name="ese_pra" class="form-control td-in" required=""></td>
-                        <td><input type="number" value="{{row.pr_pa}}" name="pr_pa" class="form-control td-in" required=""></td>
+                        <td><input id="ese_th" type="number" value="{{row.ese_th}}" name="ese_th" class="form-control td-in" required=""></td>
+                        <td><input id="ese_pr" type="number" value="{{row.ese_prh}}" name="ese_prh" class="form-control td-in" required=""></td>
+                        <td><input id="ct" type="number" value="{{row.ct}}" name="ct" class="form-control td-in" required=""></td>
+                        <td><input id="mp" type="number" value="{{row.mp}}" name="mp" class="form-control td-in" required=""></td>
+                        <td><input id="ese_prd" type="number" value="{{row.ese_pra}}" name="ese_pra" class="form-control td-in" required=""></td>
+                        <td><input id="pr_pa" type="number" value="{{row.pr_pa}}" name="pr_pa" class="form-control td-in" required=""></td>
                     </tr>
                 </tbody>
                 </table>

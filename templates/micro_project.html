@@ -24,7 +24,7 @@
               </thead>
             <tbody>
               {% for select in rows %}
-              <form action="/micro_project" method="POST" >
+              <form action="/micro_project" method="POST" name="micro1" onsubmit=" return  micro_project1()"  >
               <tr>
                 <td >{{studentsenterro[count.value]}}</td>
                 <td >{{stuententerName[count.value]}}</td>
@@ -71,14 +71,14 @@
               {% endfor %}
               </form>
                 <tr>
-                  <form action="/micro_project" method="POST"> 
+                  <form action="/micro_project" method="POST" name="micro_pro1" onsubmit="return micro_project()" > 
                   <td>{{studentPresentro[0]}}</td>
                   <td>{{studentPresentna[0]}}</td>            
-                  <td><input type="number" value=-1   name="co1" id="co1"  class="form-control td-in" ></td>
-                  <td><input type="number" value=-1   name="co2" id="co2"   class="form-control td-in" ></td>
-                  <td><input type="number" value=-1  name="co3" id="co3"   class="form-control td-in" ></td>
-                  <td><input type="number" value=-1  name="co4" id="co4"   class="form-control td-in" ></td>
-                  <td><input type="number"  value=-1 name="co5" id="co5"   class="form-control td-in" ></td>
+                  <td><input id="micro1" type="number" value=-1   name="co1" id="co1"  class="form-control td-in" ></td>
+                  <td><input id="micro2" type="number" value=-1   name="co2" id="co2"   class="form-control td-in" ></td>
+                  <td><input id="micro3" type="number" value=-1  name="co3" id="co3"   class="form-control td-in" ></td>
+                  <td><input id="micro4" type="number" value=-1  name="co4" id="co4"   class="form-control td-in" ></td>
+                  <td><input id="micro4" type="number"  value=-1 name="co5" id="co5"   class="form-control td-in" ></td>
                   <td id="assign-add"><input type="submit" class="btn btn-primary td-in" value="Add" name="entry"></td>
                 </form>
                 </tr> 
