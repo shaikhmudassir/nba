@@ -59,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-          <form method="POST" action="/test1">
+          <form method="POST" action="/test1" name="test" onsubmit=" return validatetest()">
           {% for row in rows %}
             <tr>
               <td>{{row.Id}}</td>
@@ -77,12 +77,7 @@
               <td id="{{row.rollNo}}10" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}10  id={{row.rollNo}}10 style="display:none">{{row.CO3_4 if row.CO3_4>=0 else ""}}</td>
               <td id="{{row.rollNo}}11" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}11  id={{row.rollNo}}11 style="display:none">{{row.CO3_5 if row.CO3_5>=0 else ""}}</td>
               <td><input type="submit" class="btn btn-primary" name="{{row.StudentName}}" value="Edit"></td>   
-              <script>
-                function inputter(present){
-                  console.log(document.getElementById(present).childNodes[0].id)
-                  document.getElementById(present).childNodes[0].style.display="block"
-                }
-                </script>             
+                     
             </tr>
 
               {% endfor %}
@@ -92,17 +87,17 @@
                 <td>{{id}}</td>
                 <td>{{rollno}}</td>
                 <td>{{name}}</td>
-                <td><input value=0 type="number" name=co1.1 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co1.2 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co1.3 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co2.1 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co2.2 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co2.3 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co3.1 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co3.2 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co3.3 class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co3.4  class="form-control td-in "></td>
-                <td><input value=0 type="number" name=co3.5  class="form-control td-in "></td>
+                <td><input id="two_marks1"  value=0 type="number" name=co1.1 class="form-control td-in "></td>
+                <td><input id="two_marks2"   value=0 type="number" name=co1.2 class="form-control td-in "></td>
+                <td><input id="two_marks3"   value=0 type="number" name=co1.3 class="form-control td-in "></td>
+                <td><input id="two_marks4"  value=0 type="number" name=co2.1 class="form-control td-in "></td>
+                <td><input id="two_marks5"   value=0 type="number" name=co2.2 class="form-control td-in "></td>
+                <td><input id="two_marks6"   value=0 type="number" name=co2.3 class="form-control td-in "></td>
+                <td><input id="four_marks1" value=0 type="number" name=co3.1 class="form-control td-in "></td>
+                <td><input id="four_marks2" value=0 type="number" name=co3.2 class="form-control td-in "></td>
+                <td><input id="four_marks3" value=0 type="number" name=co3.3 class="form-control td-in "></td>
+                <td><input id="four_marks4" value=0 type="number" name=co3.4  class="form-control td-in "></td>
+                <td><input id="four_marks5" value=0 type="number" name=co3.5  class="form-control td-in "></td>
                <td><input type="submit" class="btn btn-primary" name="entry" value="Enter"></td>
               </form>
           </tr>
@@ -206,6 +201,22 @@
           </tr>
         </thead>
       </table>
-  
+      <script>
+        function inputter(present){
+          console.log(document.getElementById(present).childNodes[0].id)
+          document.getElementById(present).childNodes[0].style.display="block"
+        }
+        function validatetest()
+{
+  var returnval=true;
+  if(document.forms['test']["two_marks"].value>2)
+  {
+  alert("value is exceeding 2");
+     returnval=false;
+  }
+  return returnval;
+
+}
+        </script>     
 
 {% endblock %}

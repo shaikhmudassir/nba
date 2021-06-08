@@ -8,7 +8,7 @@
 
 <h3>PR PA</h3>
 <table id="table" class="table table-me">
-  <form method="POST" action="/prpa">
+  <form method="POST" action="/prpa" name="prpa" onsubmit="return prpa()">
   <thead class="thead-dark">
     <tr>
       <th colspan="6">CO Wise Weightage Decided by Course Coordinator</th>
@@ -25,11 +25,11 @@
        <tr>
          <th>No. OF Practicals</th> 
          {% if practical == None %}
-         <td id=""><input name="prac1" type="number"></td>
-         <td id=""><input name="prac2" type="number"></td>
-         <td id=""><input name="prac3" type="number"></td>
-         <td id=""><input name="prac4" type="number"></td>
-         <td id=""><input name="prac5" type="number"></td>
+         <td id=""><input id="prac1" name="prac1" type="number" required ></td>
+         <td id=""><input id="prac2" name="prac2" type="number" required></td>
+         <td id=""><input id="prac3" name="prac3" type="number" required></td>
+         <td id=""><input id="prac4" name="prac4" type="number" required></td>
+         <td id=""><input id="prac5" name="prac5" type="number" required></td>
          <td id=""></td>
          <td><input type="submit" class="btn btn-primary" name="add" value="Add"></td>  
          {% else %}
@@ -84,7 +84,7 @@
           <td>{{row.Id}}</td>
           <td>{{row.rollNo}}</td>
           <td>{{row.StudentName}}</td>
-          <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}1  id={{row.rollNo}}1 style="display:none">{{row.Marks_Obtained if row.Marks_Obtained>=0 else ""}}</td>
+          <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="number" name="total"  id={{row.rollNo}}1 style="display:none">{{row.Marks_Obtained if row.Marks_Obtained>=0 else ""}}</td>
           <td>{{row.CO1}}</td>
           <td>{{row.CO2}}</td>
           <td>{{row.CO3}}</td>

@@ -12,7 +12,7 @@ total=0
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/nba'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/nba1'
 #app.config['UPLOAD_FOLDER'] = 'C:\\Python37\\Projects\\NBA\\files' #error
 app.config['UPLOAD_FOLDER'] = app.root_path + '/files'
 
@@ -248,23 +248,24 @@ class Po_attainment(db.Model):
 
 @app.route('/',methods=['GET','POST'])
 def dashboard():
+  # Following 4 line check user login or not
   if 'user_id' in session:
     pass
   else:
      return redirect('/login')
 
   select = Index.query.filter_by(userId=session['user_id'])
-  
+
   return render_template('dashboard.html',rows=select)
 
 @app.route('/index',methods=['GET','POST'])
-def index():
-  # Check Login 
+def index(): 
   if 'user_id' in session:
     pass
   else:
     return redirect('/login')
 
+  # Post Request Maybe Come From Index.html Or Dashboard.html
   if request.method == 'POST':
     academicYear = request.form.get('academicYear')  		
     semester = request.form.get('semester')
@@ -284,11 +285,12 @@ def index():
     tempId2 = request.form.get('tempId2')
     new = request.form.get('new')
 
+    # New Data Enter Into Index Table
     if new == "new":
       return render_template('index.html',row=None)
 
     
-    # Only if request come form Index.html page
+    # Continue Adding New Data Enter Into Index Table
     if tempId1 == '0':
       entry = Index(
         academicYear = academicYear,  		
@@ -314,6 +316,8 @@ def index():
       session['field_id'] = select.Id
 
       return redirect('/student-list')
+
+    # Updatig Data in Index table
     elif tempId2 != None:
       select = Index.query.filter_by(Id=tempId2).first()
       select.academicYear = academicYear  		
@@ -340,11 +344,12 @@ def index():
       session['field_id'] = select.Id
       return render_template('index.html',row=select)
   
+  # Dispaly Data of selected subject
   if 'field_id' in session:
     select = Index.query.filter_by(Id=session['field_id']).first()
     return render_template('index.html',row=select)
   
-  return ('<h1>Error</h1>')
+  return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
   
 
 
@@ -355,7 +360,7 @@ def login():
 
 @app.route('/login/<string:var>',methods=['GET','POST'])
 def loginCheck(var):
-  '''If var is 0 then perform Registration else perform login '''
+  # If var is 0 then perform Registration else perform login
   if var == '0':
     if request.method == 'POST':
       username = request.form.get('username')
@@ -363,7 +368,7 @@ def loginCheck(var):
       confirmPassword = request.form.get('confirmPassword')
 
       if password != confirmPassword:
-        return ('<h1>Error</h1>')
+        return render_template('validation.html',message="Confirm Password Does not match", serverSite=True)
 
       entry = Login(
         username = username,
@@ -376,7 +381,7 @@ def loginCheck(var):
       select = Login.query.filter_by(username=username).first()
 
       if select == None or not check_password_hash(select.password, password):
-        return ('<h1>Error</h1>')
+        return render_template('validation.html',message="Username Or Password is Invalid", serverSite=True)
 
       session['user_id'] = select.Id
       return redirect('/')
@@ -388,7 +393,8 @@ def loginCheck(var):
       select = Login.query.filter_by(username=username).first()
 
       if select == None or not check_password_hash(select.password, password):
-        return ('<h1>Error</h1>')
+        return render_template('validation.html',message="Username Or Password is Invalid", serverSite=True)
+
 
       session['user_id'] = select.Id
       return redirect('/')
@@ -406,7 +412,8 @@ def studentList():
   if 'field_id' in session:
     pass
   else:
-    return ('<h1>Error</h1>')
+    return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
   
   # what if file is get replaced ?
   
@@ -425,7 +432,6 @@ def studentList():
       if select != None:
         select = Studentlist.query.filter_by(fieldId=session['field_id']).delete()
         db.session.commit()
-      print(session['field_id'])
       for row in rows:
         entry = Studentlist(
           rollNo = row['Roll No.'],
@@ -450,7 +456,7 @@ def mapping():
   if 'field_id' in session:
     pass
   else:
-    return ('<h1>Error</h1>')
+    return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
 
   select = Comapping.query.filter_by(fieldId=session['field_id']).all()
   count = len(select)
@@ -595,7 +601,8 @@ def test1():
     if 'field_id' in session:
       pass
     else:
-      return ('<h1>Error</h1>')
+      return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
     total = {'co1_1':0,'co1_2':0,'co1_3':0,'co2_1':0,'co2_2':0,'co2_3':0,'co3_1':0,'co3_2':0,'co3_3':0,'co3_4':0,'co3_5':0}
     avg = {'co1_1':0,'co1_2':0,'co1_3':0,'co2_1':0,'co2_2':0,'co2_3':0,'co3_1':0,'co3_2':0,'co3_3':0,'co3_4':0,'co3_5':0}
     per = {'co1_1':0,'co1_2':0,'co1_3':0,'co2_1':0,'co2_2':0,'co2_3':0,'co3_1':0,'co3_2':0,'co3_3':0,'co3_4':0,'co3_5':0}
@@ -629,7 +636,8 @@ def test1():
         s_id=ids[0]
         rn=-1
     else:
-      return "<h1>UPLOAD STUDENTLIST </h1>"
+      return render_template('validation.html',message="Please Upload Student List", serverSite=True)
+
     get_entry=Test1.query.filter_by(fieldId=session["field_id"]).all()
     if get_entry!=[]:
       for row in get_entry:
@@ -859,7 +867,8 @@ def test2():
   if 'field_id' in session:
       pass
   else:
-      return ('<h1>Error</h1>')
+      return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
   total = {'co4_1':0,'co4_2':0,'co4_3':0,'co4_4':0,'co5_1':0,'co5_2':0,'co4_5':0,'co5_3':0,'co5_4':0,'co5_5':0}
   avg = {'co4_1':0,'co4_2':0,'co4_3':0,'co4_4':0,'co5_1':0,'co5_2':0,'co4_5':0,'co5_3':0,'co5_4':0,'co5_5':0}
   per = {'co4_1':0,'co4_2':0,'co4_3':0,'co4_4':0,'co5_1':0,'co5_2':0,'co4_5':0,'co5_3':0,'co5_4':0,'co5_5':0}
@@ -893,7 +902,8 @@ def test2():
         s_id=ids[0]
         rn=-1
   else:
-        return "<h1>Upload StudentList</h1>"
+        return render_template('validation.html',message="Please Upload Student List", serverSite=True)
+
   get_entry=Test2.query.filter_by(fieldId=session["field_id"]).all()
   if get_entry!=[]:
       for row in get_entry:
@@ -1103,7 +1113,8 @@ def msbte():
     if 'field_id' in session:
       pass
     else:
-      return ('<h1>Error</h1>')
+      return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
     total={'th':0,'pr':0}
     avg={'th':0,'pr':0}
     per={'th':0,'pr':0}
@@ -1136,7 +1147,8 @@ def msbte():
         s_id=ids[0]
         rn=-1
     else:
-      return "<h1>Upload Student List</h1>"    
+      return render_template('validation.html',message="Please Upload Student List", serverSite=True)
+    
     for row in entries:
         total["th"]+=Counter(row.TH)
         total["pr"]+=Counter(row.PR)
@@ -1230,7 +1242,8 @@ def prpa():
     if 'field_id' in session:
       pass
     else:
-      return ('<h1>Error</h1>')
+      return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
     Practical = {'co1':0,'co2':0,'co3':0,'co4':0,'co5':0,'total':0}
     Prac_avg = {'co1':0,'co2':0,'co3':0,'co4':0,'co5':0,'total':0}
     Prac_max = {'co1':0,'co2':0,'co3':0,'co4':0,'co5':0,'total':0}
@@ -1268,7 +1281,8 @@ def prpa():
         s_id=ids[0]
         rn=-1
     else:
-      return "<h1>UPLOAD STUDENTLIST </h1>"
+      return render_template('validation.html',message="Please Upload Student List", serverSite=True)
+
     practical=Practical_prpa.query.filter_by(fieldId=session["field_id"]).first()
     if practical!=None:
        Practical["co1"]=practical.CO1
@@ -1372,7 +1386,6 @@ def prpa():
         co3=round((int(marks)*(Prac_avg["co3"]/100)))
         co4=round((int(marks)*(Prac_avg["co4"]/100)))
         co5=round((int(marks)*(Prac_avg["co5"]/100)))
-        print(Prac_avg["co5"])
         cos=Prpa(
         rollNo=rollno,
         StudentName=name,
@@ -1471,7 +1484,8 @@ def micro_project():
   if 'field_id' in session:
     pass
   else:
-    return ('<h1>Error</h1>')
+    return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
   select = Micro_project.query.filter_by(fieldId=session['field_id']).all()
   select2 = Micro_project.query.filter_by(fieldId=session['field_id']).all()
   select1 = Studentlist.query.filter_by(fieldId=session['field_id']).all() 
@@ -1524,9 +1538,7 @@ def micro_project():
   for row in select1:
     if memCount<studentCount:
       studentsenterna.append(row.studentsName)
-      print("enter",row.studentsName)
       studentsenterro.append(row.rollNo)
-      print("enter",row.rollNo)
       vemCount+=1
     memCount+=1 
 
@@ -1536,27 +1548,17 @@ def micro_project():
     presentRoll.append(0)
 
   for row in select1:
-    print("meme",vemCount)
-    print("student",presentCount)
     if vemCount==presentCount:
      presentName[0]=row.studentsName
-     print("present",presentName[0])
      presentRoll[0]=row.rollNo
-     print("present",presentRoll[0])
      break   
     presentCount+=1  
-  print('select ',select)
-  print('count', count)
 
   if request.method == 'POST':
       identifierfor=request.form.get('Id')
-      print("in methd post",identifierfor) 
       for_identity=Micro_project.query.filter_by(fieldId=session['field_id']).all()
       for rect in for_identity:
-        print("in the edit loop")
-        print("the rect id",rect.Id)
         if str(rect.Id) in request.form:
-          print("list object found",rect.Id)
           identifier.append(Micro_project.query.filter_by(Id=rect.Id,fieldId=session["field_id"]).first())
       if identifier!=[]:
         for edits in identifier:
@@ -1575,8 +1577,6 @@ def micro_project():
           Co4 = request.form.get('co4')
           Co5 = request.form.get('co5')
           forLength=len(select)
-          print("the length of the charater is")
-          print(forLength)
           entry = Micro_project(
           Co1=Co1,
           Co2=Co2,
@@ -1587,8 +1587,7 @@ def micro_project():
           )
           db.session.add(entry)
           db.session.commit()
-      else:
-         print("no data")
+      
       for row in select2:
        counter+=1
        if row.Co1!=-1:
@@ -1596,8 +1595,6 @@ def micro_project():
          totalMarks_Co1=5+(row.Co1)
          if row.Co1>5: 
            Co1_more_avg+=1
-           print("Co1 average=")
-           print(Co1_more_avg)
        if row.Co2!=-1:
          Co2_Count+=1
          totalMarks_Co2=totalMarks_Co2+(row.Co2) 
@@ -1644,8 +1641,6 @@ def micro_project():
        select3.nostudents_attempted_Co3=Co3_Count
        select3.nostudents_attempted_Co4=Co4_Count
        select3.nostudents_attempted_Co5=Co5_Count 
-       print("after entering")
-       print(Co1_more_avg)
        select3.nostudents_more_than_avgMarks_Co1=Co1_more_avg 
        select3.nostudents_more_than_avgMarks_Co2=Co2_more_avg
        select3.nostudents_more_than_avgMarks_Co3=Co3_more_avg 
@@ -1693,6 +1688,7 @@ def micro_project():
       
   return render_template('micro_project.html',rows=select,rows2=select4,rows3=select5,length=forLength,stuententerName=studentsenterna,studentsenterro=studentsenterro,studentPresentna=presentName,studentPresentro=presentRoll)
   
+  
 
 @app.route('/co_attainment',methods=['GET','POST'])
 def co_attainment():
@@ -1704,7 +1700,8 @@ def co_attainment():
   if 'field_id' in session:
     pass
   else:
-    return ('<h1>Error</h1>')
+    return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
   select= Comapping.query.filter_by(fieldId=session['field_id']).all()
   select_test1=TotalTest1.query.filter_by(fieldId=session['field_id']).all()
   select_test2=TotalTest2.query.filter_by(fieldId=session['field_id']).all()
@@ -1727,14 +1724,13 @@ def co_attainment():
   count=0
   for rows in select:
     count+=1
-    print("count",count)
   if count<5:
-      return ('<h1>Fill the remaining data or first check the CO attainment page</h1>')
+      return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
+
   for i in range(1,6):
    if select_test1!=None:
      for rows in select_test1:
        if i==1:
-          print("Co1 level",rows.CO1_Level)
           attainment_class.append(rows.CO1_Level)
        if i==2:
          attainment_class.append(rows.CO2_Level)
@@ -1744,11 +1740,9 @@ def co_attainment():
        if i==4:
           attainment_class.append(rows.CO4_Level)
        if i==5:
-          print("CO5 acheived")
           attainment_class.append(rows.CO5_Level) 
   for i in range(1,6):
    if select_prpa!=None:
-     print("select",i)
      for rows in select_prpa:
        if i==1:
           attainment_prpa.append(rows.Level_CO1)
@@ -1761,14 +1755,11 @@ def co_attainment():
        if i==5:
           attainment_prpa.append(rows.Level_CO5)  
   for j in range(0,5):
-    print("selse",j)
     if attainment_class!=[] and attainment_prpa!=[]: 
       if attainment_class[j]!=None and attainment_prpa[j]!=None: 
-         print("attainment internal",attainment_class[j])
          attainment_internal.append(Round1((attainment_class[j]+attainment_prpa[j])/2))
   if select_msbte!=None:  
     for row in select_msbte:
-      print("ee",row.Total_TH)
       attainment_external.append(Round1((row.TH_Level+row.PR_Level)/2)) 
   for k in range(0,5):
     if attainment_internal!=[] and attainment_external!=[]:
@@ -1787,8 +1778,7 @@ def co_attainment():
         select_attainment.CO4_level=final_assesment[t]
       elif t==5:  
         select_attainment.CO5_level=final_assesment[t]
-      else:
-        print("over")
+
       db.session.commit()    
   else:
     if final_assesment!=[]:
@@ -1803,8 +1793,7 @@ def co_attainment():
          CO4_Level=final_assesment[3]
        elif t==5:  
          CO5_Level=final_assesment[4]
-       else:
-         print("over")
+       
     entry=Total_attainment(
       CO1_level=CO1_Level,
       CO2_level=CO2_Level,
@@ -1828,7 +1817,8 @@ def po_attainment():
   if 'field_id' in session:
     pass
   else:
-    return ('<h1>Error</h1>')
+    return render_template('validation.html',message="Please Selecet Any Subject Otherwise Create New Subject", serverSite=True)
+
   select= Comapping.query.filter_by(fieldId=session['field_id']).first()
   select5= Comapping.query.filter_by(fieldId=session['field_id']).all()
   select_index=Index.query.filter_by(Id=session['field_id']).first()
@@ -1843,9 +1833,10 @@ def po_attainment():
   iterator=0
   for rows in select5:
     count+=1
-    print("count",count)
   if count<5:
-      return ('<h1>Fill the remaining data or first check the CO attainment page</h1>')
+      return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
+
+      
   for rows in select5:
     co_map.append(rows.coCode)
   
@@ -1872,8 +1863,6 @@ def po_attainment():
     
   for rows in select5:
     final_pos[0]+=final_assesment[iterator]*rows.po1
-    print("final assesment",final_assesment[iterator],"pos",rows.po1)
-    print("final cla",final_pos[0])
     final_pos[1]+=(final_assesment[iterator]*rows.po2)
     final_pos[2]+=(final_assesment[iterator]*rows.po3)
     final_pos[3]+=(final_assesment[iterator]*rows.po4)
@@ -1885,9 +1874,7 @@ def po_attainment():
     iterator+=1
   total_level = [1,1,1,1,1,1,1,1,1]
   for y in range(0,9):
-    final_pos[y]=final_pos[y]/total_level[y] 
-    print("final pos",final_pos[y])
-  
+    final_pos[y]=final_pos[y]/total_level[y]   
 
   if po_attainment!=None and final_pos!=[]: 
     for t in range(0,9): 
@@ -1927,8 +1914,7 @@ def po_attainment():
          finalpo7=final_pos[t]
        elif t==8:  
          finalpo8=final_pos[t]   
-       else:
-         print("over")     
+           
     entry=Po_attainment(
       finalpo1=finalpo1,
       finalpo2=finalpo2,
@@ -1948,7 +1934,7 @@ def po_attainment():
 
 @app.route('/a',methods=['GET','POST'])
 def no():
-  return render_template('login.html')
+  return render_template('validation.html',message="This is CS50", serverSite=True)
 
 @app.route('/logout')
 def logout():
