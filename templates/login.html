@@ -2,13 +2,13 @@
 <html>
     <head>
         <title>Login</title>
-        <link rel="stylesheet" href=" {{url_for('static',filename='/boostrap/style.css')}}"> 
-        <link rel="stylesheet" href=" {{url_for('static',filename='/css/style.css')}}"> 
+        <link rel="stylesheet" href=" {{url_for('static',filename='/boostrap/style.css')}}">
+        <link rel="stylesheet" href=" {{url_for('static',filename='/css/style.css')}}">
     </head>
 
     <body>
-        <div class="alert alert-info log-head" role="alert">
-            
+        <div class="log-head" role="alert">
+            <img role="alert" src="{{url_for('static',filename='/Logo.png')}}" style=" height: 240px; ">
         </div>
 
         <div class="sbs-main">
@@ -20,7 +20,7 @@
 					<input type="submit" class="btn btn-primary" id="btn-me" value="Login">
 				</form>
 			</div>
-            
+
 			<div class="log-sub" id="log-right">
 				<form action="/login/0" method="POST">
 					<h3>Register</h3>
@@ -29,9 +29,7 @@
 					<input name="confirmPassword" type="password" class="form-control log-input" placeholder="Confirm Password" required>
 					<input name="" type="submit" class="btn btn-primary" id="btn-me" value="Register">
 				</form>
-			</div>    
+			</div>
         </div>
-{% include "validation.html" %} 
-
     </body>
 </html>
