@@ -19,18 +19,37 @@
             <th colspan="5" >2 Any three 12 marks</th>   
           </tr>
           <tr>
-            <th>CE503.1</th>
-            <th>CE503.1</th>
-            <th>CE503.1</th>
-            <th>CE503.2</th>
-            <th>CE503.2</th>
-            <th>CE503.2</th>
-            <th>CE503.3</th>
-            <th>CE503.3</th>
-            <th>CE503.3</th>
-            <th>CE503.3</th>
-            <th>CE503.3</th>
+            {% for code in codes %}
+            {% if loop.index == 1 %}
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            {% elif loop.index == 2 %}
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            {% elif loop.index == 3 %}
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            <th>{{code.coCode}}</th>
+            {% endif %}
+            {% endfor %}
           </tr>
+          <!-- <tr>
+            <th>CE503.1</th>
+            <th>CE503.1</th>
+            <th>CE503.1</th>
+            <th>CE503.2</th>
+            <th>CE503.2</th>
+            <th>CE503.2</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+            <th>CE503.3</th>
+          </tr> -->
           <tr>
             <th>a</th>
             <th>b</th>
@@ -65,17 +84,17 @@
               <td>{{row.Id}}</td>
               <td>{{row.rollNo}}</td>
               <td>{{row.StudentName}}</td>
-              <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}1 id={{row.rollNo}}1 style="display:none">{{row.CO1_1 if row.CO1_1>=0 else ""}}</td>
-              <td id="{{row.rollNo}}2" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}2 id={{row.rollNo}}2 style="display:none">{{row.CO1_2 if row.CO1_2>=0 else ""}}</td>
-              <td id="{{row.rollNo}}3" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}3 id={{row.rollNo}}3 style="display:none">{{row.CO1_3 if row.CO1_3>=0 else ""}}</td>
-              <td id="{{row.rollNo}}4" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}4 id={{row.rollNo}}4 style="display:none">{{row.CO2_1 if row.CO2_1>=0 else ""}}</td>
-              <td id="{{row.rollNo}}5" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}5 id={{row.rollNo}}5 style="display:none">{{row.CO2_2 if row.CO2_2>=0 else ""}}</td>
-              <td id="{{row.rollNo}}6" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}6 id={{row.rollNo}}6 style="display:none">{{row.CO2_3 if row.CO2_3>=0 else ""}}</td>
-              <td id="{{row.rollNo}}7" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}7 id={{row.rollNo}}7 style="display:none">{{row.CO3_1 if row.CO3_1>=0 else ""}}</td>
-              <td id="{{row.rollNo}}8" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}8 id={{row.rollNo}}8 style="display:none">{{row.CO3_2 if row.CO3_2>=0 else ""}}</td>
-              <td id="{{row.rollNo}}9" onclick=inputter(this.id)><input type="text" name={{row.rollNo}}9 id={{row.rollNo}}9 style="display:none">{{row.CO3_3 if row.CO3_3>=0 else ""}}</td>
-              <td id="{{row.rollNo}}10" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}10  id={{row.rollNo}}10 style="display:none">{{row.CO3_4 if row.CO3_4>=0 else ""}}</td>
-              <td id="{{row.rollNo}}11" onclick=inputter(this.id)><input type="text"name={{row.rollNo}}11  id={{row.rollNo}}11 style="display:none">{{row.CO3_5 if row.CO3_5>=0 else ""}}</td>
+              <td id="{{row.rollNo}}1" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}1 id={{row.rollNo}}1 style="display:none">{{row.CO1_1 if row.CO1_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}2" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}2 id={{row.rollNo}}2 style="display:none">{{row.CO1_2 if row.CO1_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}3" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}3 id={{row.rollNo}}3 style="display:none">{{row.CO1_3 if row.CO1_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}4" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}4 id={{row.rollNo}}4 style="display:none">{{row.CO2_1 if row.CO2_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}5" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}5 id={{row.rollNo}}5 style="display:none">{{row.CO2_2 if row.CO2_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}6" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}6 id={{row.rollNo}}6 style="display:none">{{row.CO2_3 if row.CO2_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}7" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}7 id={{row.rollNo}}7 style="display:none">{{row.CO3_1 if row.CO3_1>=0 else ""}}</td>
+              <td id="{{row.rollNo}}8" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}8 id={{row.rollNo}}8 style="display:none">{{row.CO3_2 if row.CO3_2>=0 else ""}}</td>
+              <td id="{{row.rollNo}}9" onclick=inputter(this.id)><input type="number" name={{row.rollNo}}9 id={{row.rollNo}}9 style="display:none">{{row.CO3_3 if row.CO3_3>=0 else ""}}</td>
+              <td id="{{row.rollNo}}10" onclick=inputter(this.id)><input type="number"name={{row.rollNo}}10  id={{row.rollNo}}10 style="display:none">{{row.CO3_4 if row.CO3_4>=0 else ""}}</td>
+              <td id="{{row.rollNo}}11" onclick=inputter(this.id)><input type="number"name={{row.rollNo}}11  id={{row.rollNo}}11 style="display:none">{{row.CO3_5 if row.CO3_5>=0 else ""}}</td>
               <td><input type="submit" class="btn btn-primary" name="{{row.StudentName}}" value="Edit"></td>   
                      
             </tr>

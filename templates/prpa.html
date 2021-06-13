@@ -16,11 +16,9 @@
     </tr>
     <tr>
       <th>Course</th>
-      <th >CE503.1</th>
-      <th >CE503.2</th>   
-      <th >CE503.3</th>   
-      <th >CE503.4</th>      
-      <th >CE503.5</th> 
+      {% for code in codes %}
+      <th>{{code.coCode}}</th>
+      {% endfor %} 
       </tr>
        <tr>
          <th>No. OF Practicals</th> 
