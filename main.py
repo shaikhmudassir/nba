@@ -12,7 +12,7 @@ total=0
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/nba1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@127.0.0.1/nba'
 #app.config['UPLOAD_FOLDER'] = 'C:\\Python37\\Projects\\NBA\\files' #error
 app.config['UPLOAD_FOLDER'] = app.root_path + '/files'
 
@@ -608,11 +608,17 @@ def test1():
     per = {'co1_1':0,'co1_2':0,'co1_3':0,'co2_1':0,'co2_2':0,'co2_3':0,'co3_1':0,'co3_2':0,'co3_3':0,'co3_4':0,'co3_5':0}
     att_per={'co1':0,'co2':0,'co3':0}
     level={'co1':0,'co2':0,'co3':0}
+    codes = Comapping.query.filter_by(fieldId=session['field_id']).all()
     inp_rollno=[]
     rollnos=[]
     present=[]
     ids=[]
     names=[]
+    count = 0
+    for rows in codes:
+     count+=1
+    if count<5:
+      return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
     entries=Test1.query.filter_by(fieldId=session["field_id"]).all()
     select = Studentlist.query.filter_by(fieldId=session["field_id"]).all()
     if select!=[]:
@@ -848,13 +854,13 @@ def test1():
               db.session.add(total_entry)
               db.session.commit()
           if (rn+2)<len(rollnos):
-            return render_template('test1.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=rollnos[rn+2],name=names[rn+2],id=ids[rn+2])
+            return render_template('test1.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=rollnos[rn+2],name=names[rn+2],id=ids[rn+2])
           else:
-            return render_template('test1.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
+            return render_template('test1.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
     if rollno==0:
-      return render_template('test1.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)      
+      return render_template('test1.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)      
     if request.method=="GET":
-      return render_template('test1.html',level=level,att_per=att_per,total=total,rows=entries,avg=avg,per=per,rollno=rollno,name=name,id=s_id)
+      return render_template('test1.html',codes=codes,level=level,att_per=att_per,total=total,rows=entries,avg=avg,per=per,rollno=rollno,name=name,id=s_id)
 
 
 @app.route('/test2',methods=['GET','POST'])
@@ -879,6 +885,12 @@ def test2():
   present=[]
   ids=[]
   names=[]
+  codes = Comapping.query.filter_by(fieldId=session['field_id']).all()
+  count = 0
+  for rows in codes:
+    count+=1
+  if count<5:
+    return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
   entries=Test2.query.filter_by(fieldId=session["field_id"]).all()
   select = Studentlist.query.filter_by(fieldId=session["field_id"]).all()
   if select!=[]:
@@ -1095,13 +1107,13 @@ def test2():
           db.session.add(total_entry)
           db.session.commit()
       if (rn+2)<len(rollnos):
-       return render_template('test2.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=rollnos[rn+2],name=names[rn+2],id=ids[rn+2])
+       return render_template('test2.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=rollnos[rn+2],name=names[rn+2],id=ids[rn+2])
       else:
-       return render_template('test2.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
+       return render_template('test2.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
   if rollno==0:
-    return render_template('test2.html',level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
+    return render_template('test2.html',codes=codes,level=level,att_per=att_per,total=total,avg=avg,per=per,rows=entries,rollno=0)
   if request.method=="GET":
-        return render_template('test2.html',level=level,att_per=att_per,total=total,rows=entries,avg=avg,per=per,rollno=rollno,name=name,id=s_id)
+        return render_template('test2.html',codes=codes,level=level,att_per=att_per,total=total,rows=entries,avg=avg,per=per,rollno=rollno,name=name,id=s_id)
 
 @app.route('/msbte',methods=['GET','POST'])
 def msbte():
@@ -1258,6 +1270,12 @@ def prpa():
     fetch=[]
     ids=[]
     names=[]
+    codes = Comapping.query.filter_by(fieldId=session['field_id']).all()
+    count = 0
+    for rows in codes:
+      count+=1
+    if count<5:
+      return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
     select=Studentlist.query.filter_by(fieldId=session["field_id"]).all()
     entries=Prpa.query.filter_by(fieldId=session["field_id"]).all()
     if select!=[]:
@@ -1462,14 +1480,14 @@ def prpa():
              db.session.commit()
              practical=Practical_prpa.query.filter_by(fieldId=session["field_id"]).first()
         if (rn+2)<len(rollnos):
-          return render_template('prpa.html',practical=practical,level=level,total=total,avg=avg,per=per,\
+          return render_template('prpa.html',codes=codes,practical=practical,level=level,total=total,avg=avg,per=per,\
           rows=entries,rollno=rollnos[rn+2],name=names[rn+2],id=ids[rn+2],Prac_avg=Prac_avg,Prac_max=Prac_max)
         else:
-          return render_template('prpa.html',practical=practical,level=level,total=total,avg=avg,per=per,rows=entries,rollno=0,Prac_avg=Prac_avg,Prac_max=Prac_max)
+          return render_template('prpa.html',codes=codes,practical=practical,level=level,total=total,avg=avg,per=per,rows=entries,rollno=0,Prac_avg=Prac_avg,Prac_max=Prac_max)
     if rollno==0:
-      return render_template('prpa.html',practical=practical,level=level,total=total,avg=avg,per=per,rows=entries,rollno=0,Prac_avg=Prac_avg,Prac_max=Prac_max)
+      return render_template('prpa.html',codes=codes,practical=practical,level=level,total=total,avg=avg,per=per,rows=entries,rollno=0,Prac_avg=Prac_avg,Prac_max=Prac_max)
     if request.method=="GET":
-      return render_template('prpa.html',rows=entries,level=level,total=total,practical=practical, \
+      return render_template('prpa.html',codes=codes,rows=entries,level=level,total=total,practical=practical, \
     avg=avg,per=per,rollno=rollno,name=name,id=s_id,Prac_avg=Prac_avg,Prac_max=Prac_max)
 
 
