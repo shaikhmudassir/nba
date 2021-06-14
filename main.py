@@ -1722,9 +1722,18 @@ def co_attainment():
   CO4_Level=0
   CO5_Level=0
   count=0
+  flag=0
   for rows in select:
-    count+=1
-  if count<5:
+     count+=1
+  for rows in select_test1:
+      flag+=1
+      print("executed")
+  for rows in select_test2:
+      flag+=1
+  for rows in select_prpa:
+      flag+=1
+      print(session['field_id'])            
+  if count<5 or flag<3:
       return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
 
   for i in range(1,6):
@@ -1755,7 +1764,7 @@ def co_attainment():
        if i==5:
           attainment_prpa.append(rows.Level_CO5)  
   for j in range(0,5):
-    if attainment_class!=[] and attainment_prpa!=[]: 
+    if len(attainment_class)!=0 and len(attainment_prpa)!=0: 
       if attainment_class[j]!=None and attainment_prpa[j]!=None: 
          attainment_internal.append(Round1((attainment_class[j]+attainment_prpa[j])/2))
   if select_msbte!=None:  
@@ -1766,8 +1775,8 @@ def co_attainment():
       enternal=int(attainment_internal[k])
       external=int(attainment_external[0])
       final_assesment.append(Round1((0.4*float(enternal))+(0.6*float(external)))) 
-  if select_attainment!=[] and final_assesment!=[]: 
-    for t in range(1,6): 
+  if select_attainment!=None and final_assesment!=None: 
+    for t in range(0,len(final_assesment)): 
       if t==1:
         select_attainment.CO1_level=final_assesment[t]
       elif t==2:  
@@ -1782,7 +1791,7 @@ def co_attainment():
       db.session.commit()    
   else:
     if final_assesment!=[]:
-     for t in range(1,6):
+     for t in range(0,5):
        if t==1:
          CO1_Level=final_assesment[0]
        elif t==2:  
@@ -1824,6 +1833,10 @@ def po_attainment():
   select_index=Index.query.filter_by(Id=session['field_id']).first()
   select_attainment=Total_attainment.query.filter_by(fieldId=session['field_id']).first()
   po_attainment=Po_attainment.query.filter_by(fieldId=session['field_id']).first()
+  ##for the validation edited by affan on 2-5-21
+  select_test1=TotalTest1.query.filter_by(fieldId=session['field_id']).all()
+  select_test2=TotalTest2.query.filter_by(fieldId=session['field_id']).all()
+  select_prpa=Total_prpa.query.filter_by(fieldId=session['field_id']).all() 
   co_map=[]
   final_assesment=[]
   coCode=[]
@@ -1831,9 +1844,18 @@ def po_attainment():
   total_level=[]
   count=0
   iterator=0
+  flag=0
   for rows in select5:
     count+=1
-  if count<5:
+  for rows in select_test1:
+      flag+=1
+      print("executed")
+  for rows in select_test2:
+      flag+=1
+  for rows in select_prpa:
+      flag+=1
+      print(session['field_id'])  
+  if count<5 or flag<3:
       return render_template('validation.html',message="Fill the remaining data or first check the CO attainment page", serverSite=True)
 
       
